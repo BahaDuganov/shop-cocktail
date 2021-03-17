@@ -1,0 +1,12 @@
+<each args="data: getOptions(), as: '$item'">
+    <label class="amexfee-label" attr="for: $parent.uid + '_' + $item.index">
+        <input type="radio"
+               class="amexfee-input __show-input"
+               ko-checked="$parent.value"
+               attr="value: $item.index, id: $parent.uid + '_' + $item.index, name: $parent.name + '.extrafee'">
+        <span class="__radio-btn">
+            <text args="$item.label"/> -
+            <text args="$parent.taxUtils.getPrice($data)"/>
+        </span>
+    </label>
+</each>
