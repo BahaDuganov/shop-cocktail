@@ -1,0 +1,47 @@
+.progress-bar-container {
+    width: 75%;
+    height: 40px;
+    position: relative;
+    line-height: 40px;
+    margin: 15px 150px;
+    border: 1px solid #000000;
+    border-radius: 18px;
+    font-size: x-large;
+    background: #6e716e;
+
+    @media screen and (max-width: @screen__m) {
+        width: 99%;
+        margin: 15px 0;
+    }
+
+    @media screen and (max-width: @screen__s) {
+        font-size: medium;
+    }
+
+    @media screen and (max-width: @screen__xs) {
+        font-size: small;
+    }
+
+    .progress-bar-percent {
+        height: inherit;
+        background: #1979c3;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 0;
+        border-radius: 16px;
+    }
+
+    .progress-bar-text {
+        width: 100%;
+        height: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        vertical-align: middle;
+        font-size: inherit;
+        font-weight: 600;
+        color: #ffffff;
+    }
+}

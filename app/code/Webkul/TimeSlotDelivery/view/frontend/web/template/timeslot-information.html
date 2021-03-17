@@ -1,0 +1,27 @@
+<!--
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_MpTimeDelivery
+ * @author Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+-->
+<!--ko if: isVisible() == true -->
+<div class="timeslot-information">
+    <div class="time-slot">
+        <div class="timeslot-information-title" style="text-align:left;">
+            <div>
+                <strong data-bind="i18n:'Delivery Day: '"></strong>
+                <span data-bind="text: getSlotInfo().date"></span>
+            </div>
+            <div>
+                <strong data-bind="i18n:'Delivery Time: '"></strong>
+                <span data-bind="text: getSlotInfo().slot_time"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ko-->

@@ -1,0 +1,115 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View\Description
+ */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+?>
+
+
+<!-----Product Brand---------->
+<?php if ($_product->getBrand()): $brand = $_product->getResource()->getAttribute('brand')->getFrontend()->getValue($_product); ?>
+    <div class="product__brand-name">By <a
+            href="/catalogsearch/result/?q=<?php echo str_replace('&', '%26', trim($brand)) ?>"><?php echo trim($brand); ?></a>
+    </div>
+<?php endif; ?>
+<!-----Product Brand---------->
+
+
+<!-----Product Package Type---------->
+<?php if ($_product->getAdditionalAttributes()):
+    $additionalAttributes = $_product->getResource()->getAttribute('additional_attributes')->getFrontend()->getValue($_product);
+    $additionalAttributesArray = explode(',', $additionalAttributes);
+    ?>
+    <div class="product__package-type _block product__additional-attribute-parent">
+        <!--<div class="product__additional-attribute-title"><?php //echo $_product->getResource()->getAttribute('additional_attributes')->getFrontendLabel();
+        ?></div>-->
+        <ul class="product__package-type-list product__additional-attribute-list">
+            <?php foreach ($additionalAttributesArray as $additionalAttribute): ?>
+                <li class="product__additionalAttributesItem">
+                    <span
+                        title="<?php echo trim($additionalAttribute); ?>"><?php echo trim($additionalAttribute); ?></span>
+                </li>
+            <?php endforeach; ?>
+            <?php //echo $additionalAttributes
+            ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<!-----Product Show Me Only---------->
+<?php if ($_product->getFreeFrom()):
+    $freeFrom = $_product->getResource()->getAttribute('free_from')->getFrontend()->getValue($_product);
+    $freeFromArray = explode(',', $freeFrom);
+    ?>
+    <div class="product__freeFromContainer _block product__additional-attribute-parent">
+        <!--<div class="product__additional-attribute-title"><?php //echo $_product->getResource()->getAttribute('free_from')->getFrontendLabel();
+        ?></div>-->
+        <ul class="product__label-tags">
+            <?php foreach ($freeFromArray as $freeFrom): ?>
+                <li>
+                    <span title="<?php echo trim($freeFrom); ?>"
+                          class="product__label-tag label-tag"><?php echo trim($freeFrom); ?></span>
+                </li>
+            <?php endforeach; ?>
+            <?php //echo $freeFrom
+            ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<!-----Product Certificate---------->
+<?php if ($_product->getCertifications()):
+    $certificates = $_product->getResource()->getAttribute('certifications')->getFrontend()->getValue($_product);
+    $certificateArray = explode(',', $certificates);
+    ?>
+    <div class="product__certificationsContainer _block">
+        <ul class="product__certificationsList _flex">
+            <?php foreach ($certificateArray as $certificate): $certificateImage = strtolower(trim($certificate)); ?>
+                <li class="product__certificationsItem">
+                    <img
+                        src="<?php echo $this->getViewFileUrl('images/certifications/' . preg_replace('/\s+/', '-', $certificateImage) . '.png'); ?>"
+                        alt="<?php echo trim($certificate); ?>" title="<?php echo trim($certificate); ?>">
+                    <!--<span class="icon icon-<?php //echo strtolower(str_replace(" ","-", trim($certificate))); ?>"></span>-->
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<!-----Product Weight---------->
+<?php /* if($_product->getPackSize() && $_product->getTypeId() != 'configurable'):
+    $pack_size = $_product->getResource()->getAttribute('pack_size')->getFrontend()->getValue($_product);
+    ?>
+    <div class="product__weightContainer _block bm15">
+        <?php echo trim($pack_size); ?>
+    </div>
+<?php endif; */ ?>
+
+<!-----Product Extra Text---------->
+<?php // $extraText = $_product->getResource()->getAttribute('extra_text')->getFrontend()->getValue($_product); ?>
+<?php // if ($extraText != ''): ?>
+    <div class="additional-attributes-detail _block">
+        <span class="atrributes-text"><?php // echo $extraText; ?></span>
+    </div>
+<?php // endif; ?>
+
+<!-----Lead Time Notification---------->
+<?php /* $leadTimeNotification = $_product->getResource()->getAttribute('lead_time_notification')->getFrontend()->getValue($_product); ?>
+<?php if ($leadTimeNotification != ''): ?>
+    <div class="product_leadTimeNotification _block">
+        <span class="">*</span>
+        <span class="leadTimeNotification"><?php echo $leadTimeNotification; ?></span>
+    </div>
+<?php endif; */ ?>

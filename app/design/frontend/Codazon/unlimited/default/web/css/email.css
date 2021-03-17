@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+h1, h2, h3, h4, p {
+    font-size: 36px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5rem;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 15px;
+}
+
+p {
+    font-size: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.space-top-15 {
+    margin-top: 15px !important;
+    display: block;
+}
+
+.space-bottom-15 {
+    margin-bottom: 15px !important;
+    display: block;
+}
+
+.space-left-15 {
+    margin-left: 15px !important;
+    display: block;
+}
+
+.space-right-15 {
+    margin-right: 15px !important;
+    display: block;
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+
+.emailContainer {
+    margin: 0 auto;
+    width: 580px;
+    border: 1px solid #0000002e;
+    box-shadow: 0 0 10px #0000002e;
+}
+
+.emailContainer tr td {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Start */
+.header {
+    background-color: #106287;
+    width: 100%;
+    border: none;
+}
+
+.header tr td {
+    width: 50%;
+    padding: 15px;
+}
+
+.logo {
+    max-width: 110px;
+    width: 100%;
+}
+
+.logo-shopper {
+    max-width: 265px;
+    width: 100%;
+}
+
+/* Banner Start */
+
+.banner-box {
+    width: 100%;
+}
+
+.banner-box .banner {
+    width: 100%;
+}
+
+/* Welcome Email Start */
+.content-box {
+    margin-top: 30px;
+}
+
+.content-box tr td {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.list-box {
+    position: relative;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.list-box tr td {
+    position: relative;
+    vertical-align: middle;
+
+}
+
+.list-box tr td p {
+    margin-bottom: 0 !important;
+}
+
+.list-img-box {
+    text-align: center;
+    width: 20%;
+}
+
+.list-cont {
+    width: 80%;
+}
+
+.list-img-1 {
+    width: 100%;
+    max-width: 60px;
+}
+
+/* Footer Start */
+.footer {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #CECECE;
+    /* margin-top: 30px; */
+}
+
+.footer tr td {
+    padding: 0 15px;
+    text-align: center;
+}
+
+.app-store-box {
+    width: 100%;
+    border: none;
+}
+
+.app-store-box tr td {
+    width: 50%;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.app-store {
+    width: 100%;
+}
+
+
+/* Order Email */
+.order-info-box {
+    position: relative;
+    width: 100%;
+}
+
+.order-info-box tr td {
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+}
+
+.border-bottom-1 {
+    border-bottom: 1px solid #CECECE;
+}
+
+.order-table {
+    width: 100%;
+}
+
+.order-table thead {
+    background-color: #242B3D;
+    color: #fff;
+}
+
+.order-table tbody tr {
+    border-bottom: 1px solid #CECECE;
+}
+
+.order-table tfoot {
+    background-color: #F7F7F7;
+}
+
+.order-table tr td {
+    padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    vertical-align: text-top;
+}
+
+.order-table tr td h4, .order-table tr td p {
+    margin: 0 !important;
+}
+
+.order-table tfoot tr td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.smile-icon {
+    vertical-align: middle;
+}
+
+.inner_container {
+    padding: 15px 0;
+}
+
+.inner_container > div {
+    padding: 0 15px 15px;
+    border-bottom: 1px solid #CECECE;
+}
+
+._unbold {
+    font-weight: 400;
+}

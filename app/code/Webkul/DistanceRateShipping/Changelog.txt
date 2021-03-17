@@ -1,0 +1,22 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 3.0.0 --------------------------------------
+
+	+ Compatible with magento 2.3.x
+	+ Admin can Enable/Disable the Shipping Method
+	+ Admin can provide Distance Rate Shipping method for their Products
+	+ Admin can set Shipping Origin Address based on which the calculation will be done
+	+ Admin can set Shipping Rate per Unit Distance
+	+ Admin can add Handling Charge, Minimum Charge
+	+ Admin can set Maximum Area to Cover
+	+ Admin can add whether to apply shipping item wise
+	+ Admin can set Custom Error Message to display if shipping not applicable
+	+ Admin can enable to Display Estimate Shipping Rate on Product pages
+	+ Admin can set distance calculation based on "Google Map Distance Matrix" or "Latitude Longitude"
+	+ The Distance Unit can be in Kilometer or Mile which can be set by Admin
+
+
+	

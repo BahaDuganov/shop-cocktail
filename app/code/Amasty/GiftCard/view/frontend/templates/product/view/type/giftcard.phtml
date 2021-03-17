@@ -1,0 +1,141 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftCard
+ */
+?>
+<?php /** @var $block \Amasty\GiftCard\Block\Product\View\Type\GiftCard */ ?>
+<?php $product = $block->getProduct(); ?>
+<!-- ko scope: 'giftCard' -->
+<div class="amcard-general-container" data-bind="css: {'-visible': isContainerReady}">
+    <!-- ko if: giftCardType == cardTypes.combined -->
+    <div class="amcard-form-container">
+        <span class="amcard-title" data-bind="i18n: 'Want to send a physical gift card or prefer to keep things digital?'"></span>
+        <div class="amcard-flex-container -checkbox">
+            <div class="amcard-checkbox-container">
+                <input type="checkbox"
+                       id="amcard-checkbox-physical"
+                       class="amcard-checkbox"
+                       data-bind="checked: isPhysicalGift, checkedValue: 2, css: {'required-entry': !currentCardType()}"/>
+                <label for="amcard-checkbox-physical" class="amcard-label">
+                    <span class="amcard-name" data-bind="i18n: 'Physical Gift Card'"></span>
+                </label>
+            </div>
+            <div class="amcard-checkbox-container">
+                <input type="checkbox"
+                       id="amcard-checkbox-egift"
+                       class="amcard-checkbox"
+                       data-bind="checked: isEGift, checkedValue: 1, css: {'required-entry': !currentCardType()}"/>
+                <label for="amcard-checkbox-egift" class="amcard-label">
+                    <span class="amcard-name" data-bind="i18n: 'e-Gift Card'"></span>
+                </label>
+            </div>
+        </div>
+        <input type="text"
+               name="am_giftcard_type"
+               class="amcard-input -hidden required-entry"
+               data-bind="value: currentCardType, afterRender: getGiftCardType.bind($data, $element.name)"/>
+    </div>
+    <!-- /ko -->
+    <div class="amcard-form-container" data-bind="scope: 'price'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div class="amcard-form-container -interior" data-bind="scope: 'images'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <div class="amcard-form-container">
+        <div class="amcard-flex-container">
+            <!-- ko if: isShowField('am_giftcard_sender_name') -->
+            <div class="amcard-field-container">
+                <span class="amcard-title" data-bind="i18n: 'Your Name'"></span>
+                <div class="amcard-field-block">
+                    <input type="text"
+                           class="amcard-field required-entry"
+                           name="am_giftcard_sender_name"
+                           data-amcard-js="field"
+                           data-bind="attr: {placeholder: $t('Enter Sender Name')}, value: getPreconfiguredValue($element.name)"/>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: isShowField('am_giftcard_recipient_name') && (!isPhysicalGift() || isEGift()) -->
+            <div class="amcard-field-container">
+                <span class="amcard-title" data-bind="i18n: 'Recipient Name'"></span>
+                <div class="amcard-field-block">
+                    <input type="text"
+                           class="amcard-field required-entry"
+                           name="am_giftcard_recipient_name"
+                           data-amcard-js="field"
+                           data-bind="attr: {placeholder: $t('Enter Recipient Name')}, value: getPreconfiguredValue($element.name)"/>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- ko if: !isPhysicalGift() || isEGift() -->
+        <span class="amcard-title" data-bind="i18n: 'Recipient Email'"></span>
+        <div class="amcard-field-block">
+            <input type="text"
+                   class="amcard-field required-entry"
+                   name="am_giftcard_recipient_email"
+                   data-amcard-js="field"
+                   data-bind="attr: {placeholder: $t('Enter Recipient Email')}, value: getPreconfiguredValue($element.name)"/>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: isShowField('am_giftcard_message') -->
+        <span class="amcard-title" data-bind="i18n: 'Message'"></span>
+        <div class="amcard-field-block">
+            <textarea class="amcard-field"
+                      name="am_giftcard_message"
+                      cols="30" rows="2"
+                      data-amgiftcard-js="textarea"
+                      data-amcard-js="field"
+                      data-bind="attr: {placeholder: $t('Enter your message')}, value: getPreconfiguredValue($element.name)"></textarea>
+            <span data-amcard-js="char-counter"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+    <!-- ko if: isEGift() || giftCardType == cardTypes.virtual -->
+    <div class="amcard-preview-container">
+        <input type="button" class="amcard-button" data-bind="value: $t('Preview Gift Card'), click: openGiftPreview"/>
+        <div class="amcard-preview" data-amcard-js="preview"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: isShowField('am_giftcard_date_delivery') -->
+    <div class="amcard-form-container" data-bind="scope: 'datepicker'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "datepicker": {
+                    "component": "Amasty_GiftCard/js/datepicker",
+                    "template": "Amasty_GiftCard/datepicker",
+                    "timezones": <?= /* @noEscape */ $block->getListTimezones() ?>
+                },
+                "images": {
+                    "component": "Amasty_GiftCard/js/images",
+                    "template": "Amasty_GiftCard/images",
+                    "images": <?= /* @noEscape */ $block->getImages() ?>,
+                    "isCustomImageAllowed": <?= /* @noEscape */ (int)$block->getAllowUsersUploadImages() ?>,
+                    "tooltip": "<?= $block->escapeHtml($block->getTooltipContent()) ?>",
+                    "customImageUrl": "<?= $block->escapeUrl($block->getCustomImageUrl()) ?>"
+                },
+                "giftCard": {
+                    "component": "Amasty_GiftCard/js/giftcard",
+                    "giftCardType": "<?= /* @noEscape */ $product->getAmGiftcardType() ?>",
+                    "previewUrl": "<?= $block->escapeUrl($block->getUrl('amgcard/preview/getPreviewContent')) ?>",
+                    "allowedFields": <?= /* @noEscape */ $block->getAvailableOptions() ?>,
+                    "preconfiguredValues": <?= /* @noEscape */ $block->getDefaultValues() ?>,
+                    "customImageUrl": "<?= $block->escapeUrl($block->getCustomImageUrl()) ?>"
+                }
+            }
+        }
+    }
+}
+</script>

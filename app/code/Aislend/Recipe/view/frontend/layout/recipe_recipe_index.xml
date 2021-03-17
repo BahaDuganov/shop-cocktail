@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="recipes-product-detail-1colmun"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	  <head>
+		<script src="Aislend_Recipe::js/recipes-list.js"/>
+	</head>
+    <body>	
+        <referenceContainer name="content">
+            <block class="Aislend\Recipe\Block\Recipe" name="aislend_recipe"
+                   template="Aislend_Recipe::recipe-detail.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

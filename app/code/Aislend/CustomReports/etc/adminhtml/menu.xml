@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Aislend_CustomReports::customreports" title="Custom Reports" translate="title" module="Aislend_CustomReports" sortOrder="5" parent="Magento_Reports::report" resource="Aislend_CustomReports::customreports"/>
+        <add id="Aislend_CustomReports::customreports_department" resource="Aislend_CustomReports::customreports" title="Custom Reports Department" action="aislend_customreports_customreports/customreport/department" module="Aislend_CustomReports" sortOrder="10" parent="Aislend_CustomReports::customreports" dependsOnModule="Aislend_CustomReports"/>
+		<add id="Aislend_CustomReports::customreports_finance" resource="Aislend_CustomReports::customreports" title="Custom Reports Finance" action="aislend_customreports_customreports/customreport/finance" module="Aislend_CustomReports" sortOrder="20" parent="Aislend_CustomReports::customreports" dependsOnModule="Aislend_CustomReports"/>
+    </menu>
+</config>
+
+
+

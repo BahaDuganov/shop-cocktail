@@ -1,0 +1,124 @@
+.su {
+    &__wrapper {
+        margin: 0 auto;
+        max-width: 600px;
+        padding: $base-spacing-unit;
+
+        border-radius: 20px;
+        background-color: $white;
+        box-shadow: 0 0 10px 4px rgba(#ccc, 0.5);
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+        max-width: 90%;
+        margin: 0 auto;
+
+        // For large screens
+        @include above__phone {
+            padding: 30px 0;
+        }
+    }
+
+    &__header {
+        font-weight: 600;
+        font-size: clamp(24px, ($vw-base * 40), 40px);
+        margin-bottom: clamp(30px, ($vw-base * 60), 60px);
+    }
+
+    &__sub-header {
+
+        ._social-links {
+            display: grid;
+            grid-gap: $base-spacing-unit;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            > a {
+                font-weight: 600;
+                text-align: center;
+                text-decoration: none;
+
+                padding: 0.8em;
+                border-radius: 4px;
+                border: 1px solid $grey;
+
+                &:hover {
+                    background: #f5f5f5;
+                }
+            }
+        }
+
+        > p {
+            font-weight: 600;
+            margin: ($base-spacing-unit * 2) 0;
+        }
+    }
+
+    &__form-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        > * {
+            margin-bottom: $base-spacing-unit;
+        }
+
+        ._forget-password {
+            align-self: flex-end;
+            color: $btn-primary-bg;
+        }
+
+        ._form-field {
+            display: grid;
+            grid-gap: $base-spacing-unit;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            input {
+                padding: 10px;
+                line-height: 1;
+                font-weight: 600;
+                border-color: $grey;
+            }
+        }
+    }
+
+    &__action-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        ._submit {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 4px;
+            text-align: center;
+
+            cursor: pointer;
+            color: $btn-primary-text;
+            background-color: $btn-primary-bg;
+            border-color: $btn-primary-border;
+
+            &:hover {
+                background-color: darken($btn-primary-hover-bg, 5%);
+            }
+        }
+    }
+
+    &__alt-login {
+        text-align: center;
+
+        > * {
+            margin-bottom: 0;
+            margin-top: $base-spacing-unit;
+        }
+
+        ._social-login {
+        }
+
+        a {
+            color: $btn-primary-bg;
+        }
+    }
+}

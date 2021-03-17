@@ -1,0 +1,167 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_TimeSlotDelivery
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">timeslotdelivery_timeslots_form.timeslots_form_data_source</item>
+			<item name="deps" xsi:type="string">timeslotdelivery_timeslots_form.timeslots_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="config" xsi:type="array">
+			<item name="dataScope" xsi:type="string">data</item>
+			<item name="namespace" xsi:type="string">timeslotdelivery_timeslots_form</item>
+		</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+		<item name="buttons" xsi:type="array">
+			<item name="back" xsi:type="string">Webkul\TimeSlotDelivery\Block\Adminhtml\TimeSlots\Edit\BackButton</item>
+			<item name="delete" xsi:type="string">Webkul\TimeSlotDelivery\Block\Adminhtml\TimeSlots\Edit\DeleteButton</item>
+			<item name="save" xsi:type="string">Webkul\TimeSlotDelivery\Block\Adminhtml\TimeSlots\Edit\SaveButton</item>
+			<item name="save_and_continue" xsi:type="string">Webkul\TimeSlotDelivery\Block\Adminhtml\TimeSlots\Edit\SaveAndContinueButton</item>
+		</item>
+	</argument>
+	<dataSource name="timeslots_form_data_source">
+		<argument name="dataProvider" xsi:type="configurableObject">
+			<argument name="class" xsi:type="string">Webkul\TimeSlotDelivery\Model\TimeSlots\DataProvider</argument>
+			<argument name="name" xsi:type="string">timeslots_form_data_source</argument>
+			<argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+			<argument name="requestFieldName" xsi:type="string">slot_id</argument>
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="submit_url" path="*/*/save" xsi:type="url"/>
+					<item name="validate_url" xsi:type="url" path="*/*/validate"/>
+				</item>
+			</argument>
+		</argument>
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+	</dataSource>
+	<fieldset name="General">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="label" xsi:type="string" translate="true">Time Slot Configuration</item>
+			</item>
+		</argument>
+		<field name="delivery_day">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Webkul\TimeSlotDelivery\Ui\Component\TimeSlot\Form\Days</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Delivery Day</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">delivery_day</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+					<item name="imports" xsi:type="array">
+						<item name="disabled" xsi:type="string">${ $.provider }:data.disable_day</item>
+					</item>
+                </item>
+            </argument>
+        </field>
+		<field name="start_time">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="label" xsi:type="string" translate="true">Slot Opening Time</item>
+						<item name="dataType" xsi:type="string">string</item>
+						<item name="formElement" xsi:type="string">date</item>
+						<item name="component" xsi:type="string">Webkul_TimeSlotDelivery/js/form/element/time</item>
+						<item name="dataScope" xsi:type="string">start_time</item>
+						<item name="sortOrder" xsi:type="number">210</item>
+						<item name="validation" xsi:type="array">
+							<item name="required-entry" xsi:type="boolean">true</item>
+						</item>
+						<item name="imports" xsi:type="array">
+                            <item name="disabled" xsi:type="string">${ $.provider }:data.disable_start</item>
+                        </item>
+					</item>
+			</argument>      
+		</field>
+		<field name="end_time">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="label" xsi:type="string" translate="true">Slot Closing Time</item>
+					<item name="component" xsi:type="string">Webkul_TimeSlotDelivery/js/form/element/time</item>
+					<item name="dataType" xsi:type="string">string</item>
+					<item name="formElement" xsi:type="string">date</item>
+					<item name="dataScope" xsi:type="string">end_time</item>
+					<item name="sortOrder" xsi:type="number">220</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+					<item name="imports" xsi:type="array">
+						<item name="disabled" xsi:type="string">${ $.provider }:data.disable_end</item>
+					</item>
+				</item>
+			</argument>      
+		</field>
+		<field name="order_count">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="label" xsi:type="string" translate="true">Order Quotas</item>
+					<item name="visible" xsi:type="boolean">true</item>
+					<item name="dataType" xsi:type="string">number</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">timeslotdelivery_timeslots_form.timeslots_form_data_source.start_time</item>
+					<item name="dataScope" xsi:type="string">order_count</item>
+					<item name="sortOrder" xsi:type="number">230</item>
+					<item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+					<item name="imports" xsi:type="array">
+						<item name="disabled" xsi:type="string">false</item>
+					</item>
+				</item>
+			</argument>      
+		</field>
+		<field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Webkul\TimeSlotDelivery\Model\TimeSlots\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="sortOrder" xsi:type="number">240</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+	</fieldset>
+	<fieldset name="orders">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="collapsible" xsi:type="boolean">true</item>
+				<item name="label" xsi:type="string" translate="true">Time Slot Orders</item>
+			</item>
+		</argument>
+		<container name="slot_order_container" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">160</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Webkul\TimeSlotDelivery\Block\Adminhtml\TimeSlots\Orders</argument>
+            </htmlContent>
+        </container>
+		
+	</fieldset>
+</form>

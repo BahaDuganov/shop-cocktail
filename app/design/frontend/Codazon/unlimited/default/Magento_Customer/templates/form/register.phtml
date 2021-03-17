@@ -1,0 +1,85 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Form\Register $block */
+?>
+<?php /* $block->getChildHtml('form_fields_before') */ ?>
+<?php /* Extensions placeholder */ ?>
+<?php /* $block->getChildHtml('customer.form.register.extra') */ ?>
+<center>
+<form action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>" method="post" id="form-validate" data-mage-init='{"validation": {}}' enctype="multipart/form-data" autocomplete="off">
+    <?= /* @noEscape */ $block->getBlockHtml('formkey'); ?>
+
+
+<div class="container" style="float: left;">
+        <div class="su__wrapper">
+            <div class="su__container">
+                <div class="su__header">Sign Up</div>
+              <!--   <div class="su__sub-header">
+                    <div class="_social-links">
+                        <a href="#">Sign up with google</a>
+                        <a href="#">Sign up with facebook</a>
+                    </div>
+                    <p>Or Sign up with your email</p>
+                </div> -->
+
+
+
+
+                <div class="su__form-wrapper">
+                    <input type="hidden" name="success_url" value="<?= $block->escapeUrl($block->getSuccessUrl()) ?>">
+                    <input type="hidden" name="error_url" value="<?= $block->escapeUrl($block->getErrorUrl()) ?>">
+                    <div class="_form-field">
+                        <input type="text" id="firstname" name="firstname" value="" class="input-text" data-validate="{required:true}" autocomplete="off" aria-required="true" aria-invalid="true" aria-describedby="firstname-error"  placeholder="First Name">
+                        <input type="text" id="lastname" name="lastname" value="" class="input-text" data-validate="{required:true}" autocomplete="off" aria-required="true" aria-invalid="true" aria-describedby="lastname-error" placeholder="Last Name">
+                    </div>
+                    <div class="_form-field">
+                        <input type="email"  name="email" autocomplete="off" id="email_address" value="" title="Email" class="input-text" data-validate="{required:true, 'validate-email':true}" aria-required="true" placeholder="Email address">
+                    </div>
+                    <div class="_form-field">
+                        <input type="password" name="password" id="password" title="Password" class="input-text" data-password-min-length="5" data-password-min-character-sets="1" data-validate="{required:true}" autocomplete="off" aria-required="true" placeholder="Password"  >
+                        <input type="password" name="password_confirmation"  title="Confirm Password" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off" placeholder="Confirm Password">
+                    </div>
+
+                    <div class="_agreement">
+                        <input type="checkbox"  data-validate="{required:true}"> By registering, you agree to our <a href="/terms-of-use"
+                            class="_forget-password">Terms of service & Privacy
+                            Policy</a>
+                    </div>
+                </div>
+
+                <div class="su__action-container">
+
+                <button type="submit" class="action submit primary" title="<?= $block->escapeHtmlAttr(__('Sign me up')) ?>"><span><?= $block->escapeHtml(__('Sign me up')) ?></span></button>
+
+                </div>
+
+                <div class="su__alt-login">
+
+
+                        <p>Already have an account? <a href="/customer/account/">Sign In</a></p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</form>
+</center>
+<script type="text/javascript">
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+   var dataForm = $('#form-validate');
+   dataForm.mage('validation', {});
+
+});
+</script>
+
+

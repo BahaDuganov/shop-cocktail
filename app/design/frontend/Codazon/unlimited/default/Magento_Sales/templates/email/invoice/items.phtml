@@ -1,0 +1,111 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+use \Mofluid\Mofluidapi2\Helper\CommonHelper;
+
+$helper=new CommonHelper();
+
+
+?>
+<?php $_invoice = $block->getInvoice() ?>
+<?php $_order   = $block->getOrder();
+
+$invoice_items=$helper->getInvoiceItems($_order->getId(),"'refund'");
+$invoice_items_replace=$helper->getInvoiceItems($_order->getId(),"'replace'");
+?>
+<?php if ($_invoice && $_order): ?>
+    <table class="email-items customized1">
+        <thead>
+        <tr>
+            <th class="item-info">
+                <?= /* @escapeNotVerified */  __('Items'); ?>
+            </th>
+            <th class="item-qty">
+                <?= /* @escapeNotVerified */  __('Qty'); ?>
+            </th>
+            <th class="item-subtotal">
+                <?= /* @escapeNotVerified */  __('Subtotal'); ?>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td align="center" colspan="3">Found</td>
+        </tr>
+        </tbody>
+        <?php foreach ($_invoice->getAllItems() as $_item): ?>
+            <?php
+            if ($_item->getOrderItem()->getParentItem()) {
+                continue;
+            }
+            ?>
+            <tbody>
+
+            <?= $block->getItemHtml($_item) ?>
+            </tbody>
+        <?php endforeach; ?>
+
+        <?php if(count($invoice_items)){ ?>
+            <tbody>
+            <tr>
+                <td align="center" colspan="3">Refunded</td>
+            </tr>
+            </tbody>
+
+            <?php foreach ($invoice_items as $key => $value) { ?>
+
+                <tr>
+                    <td class="customized item-info">
+                        <p class="product-name"><?= $value['name']; ?></p>
+                        <p class="sku"><?= $block->escapeHtml(__('SKU')) ?>: <?= $value['sku']; ?></p>
+
+                    </td>
+                    <td class="item-qty">
+                        <?php  echo $value['weighted']?$value['weight']:$value['quantity']; ?>
+
+                    </td>
+                    <td class="item-price">
+                        $0
+                    </td>
+                </tr>
+
+            <?php   } ?>
+        <?php } ?>
+
+        <?php if(count($invoice_items_replace)){ ?>
+            <tbody>
+            <tr>
+                <td align="center" colspan="3">Replacement</td>
+            </tr>
+            </tbody>
+
+            <?php foreach ($invoice_items_replace as $key => $value) { ?>
+
+                <tr>
+                    <td class="customized item-info">
+                        <p class="product-name"><?= $value['name']; ?></p>
+                        <p class="sku"><?= $block->escapeHtml(__('SKU')) ?>: <?= $value['sku']; ?></p>
+
+                    </td>
+                    <td class="item-qty">
+                        <?php  echo $value['weighted']?$value['weight']:$value['quantity']; ?>
+
+                    </td>
+                    <td class="item-price">
+                        $0
+                    </td>
+                </tr>
+
+            <?php   } ?>
+        <?php } ?>
+
+
+        <tfoot class="order-totals">
+        <?= $block->getChildHtml('invoice_totals') ?>
+        </tfoot>
+    </table>
+<?php endif; ?>

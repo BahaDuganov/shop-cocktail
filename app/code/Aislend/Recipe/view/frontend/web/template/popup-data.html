@@ -1,0 +1,35 @@
+<div class="_block">
+    <ul class="altIngredients__wrapper" data-bind="foreach: getMoreListData()">
+        <!-- ko if: selectedProduct.outofstock == true -->
+        <li class="altIngredients__item">
+            <div class="altIngredients__item-inner">
+                <a data-bind="attr: {href: selectedProduct.productUrl}" class="altIngredients__image">
+                    <img data-bind="attr: {src: selectedProduct.src}"/>
+                </a>
+                <div class="altIngredients__name-wrapper">
+                    <a data-bind="attr: {href: selectedProduct.productUrl}" class="_block">
+                        <div class="altIngredients__name" data-bind="text: selectedProduct.name"></div>
+                    </a>
+                    <div class="altIngredients__price _block" data-bind="text: selectedProduct.price"></div>
+                </div>
+                <div class="altIngredients__select-wrapper">
+                <span data-bind="attr: {productid: selectedProduct.productId}, click: $parent.changeProductRequest"
+                      class="btn btn__default altIngredients__select">Select</span>
+                </div>
+            </div>
+        </li>
+        <!-- /ko -->
+
+        <!-- ko if: selectedProduct.outofstock == false -->
+        <li class="altIngredients__item">
+            <a href="#" class="altIngredients__image">
+                <img data-bind="attr: {src: selectedProduct.src}"/>
+            </a>
+            <div>
+                <div class="altIngredients__name" data-bind="text: selectedProduct.name"></div>
+                <div class="altIngredients__price">Out Of Stock</div>
+            </div>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>

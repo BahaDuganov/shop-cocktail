@@ -1,0 +1,83 @@
+//  ============================================
+//  @author: nChauhan
+//  @package: Important config & style variables
+//  ============================================
+
+//  =====================================================================================
+//  ++++++++++++++++++++++++++++++++ Main variables +++++++++++++++++++++++++++++++++++++
+//  =====================================================================================
+$site-container-max-width: 1300px; //  Control max width of the application from here.
+$site-container-min-width: 320px; //  Control min width of the application from here.
+
+// Font sizing
+$vw-base: 0.052vw;
+$alt-color: #242B3D;
+$base-spacing-unit: 15px;
+$theme-primary: #106287;
+$dark-green: #242B3D;
+$light-green: #48BF84;
+$light-grey: #a7a6a6;
+$theme-orange: $theme-primary;
+$grey: #dddbdb;
+$white: #ffffff;
+$pd-green: $light-green;
+$cl-purple: $theme-primary;
+$theme-grey: #f4f4f4;
+$orange-highlight: #FE5F55;
+
+//  =================
+//  Custom variables
+//  =================
+$main-page-bg: #F2F3FF;
+$heading-color: #082E40;
+$header-nav-separator: $theme-primary;
+$card-price-color: #707070;
+$header-text-color: $white;
+
+$btn-primary-text: $white;
+$btn-primary-bg: $theme-primary;
+$btn-primary-border: $theme-primary;
+
+$btn-primary-hover-bg: $btn-primary-bg;
+$btn-primary-hover-text: $btn-primary-text;
+$btn-primary-hover-border: $theme-primary;
+
+
+$qs-text: $white;
+$qs-bg: $cl-purple;
+$qs-hover-text: $white;
+$qs-hover-bg: darken($qs-bg, 10%);
+
+
+$slider-nav-color: $white;
+$slider-nav-bg: $theme-primary;
+$wishlist-hover-bg: $orange-highlight;
+
+$product-card-title-text: $dark-green;
+$product-card-title-text-hover: $dark-green;
+
+$popup-price-text: $dark-green;
+$product-vendor-text: $theme-primary;
+
+$footer-icons-color: $heading-color;
+$footer-icons-hover-color: $theme-orange;
+
+$minicart-price-color: $theme-primary;
+$progress-bar-percent: transparent;
+$progress-bar-text: $white;
+
+//  =================
+//  Header variables
+//  =================
+$feature-links-color: $white;
+$search-border-color: none !important;
+$header-subnav-color: #FFFFFF;
+
+//  =======================
+//  Home content variables
+//  =======================
+$home-block-heading: $theme-primary;
+$home-block-description: $dark-green;
+
+$category-text-base-color: $dark-green;
+$ty-highlight: #C9DFE9;

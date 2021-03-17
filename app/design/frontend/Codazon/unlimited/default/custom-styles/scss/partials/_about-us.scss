@@ -1,0 +1,701 @@
+* {
+    box-sizing: border-box;
+}
+
+.abt {
+    // Main wrapper
+    &__wrapper {
+        width: 100%;
+        float: left;
+        background-color: #f4faf6;
+
+        // For large screens
+        @include above__phone {
+            padding-bottom: 100px;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding-bottom: 30px;
+        }
+    }
+
+    // Main banner wrapper
+    &__banner-wrapper {
+        width: 100%;
+        display: flex;
+        position: relative;
+
+        // For large screens
+        @include above__phone {
+            min-height: 500px;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+    }
+
+    // Image wrapper
+    &__banner-image {
+        width: 100%;
+        display: flex;
+        max-height: 500px;
+
+        // For large screens
+        @include above__phone {
+
+        }
+
+        // For mobile devices
+        @include phone {
+            min-height: 250px;
+        }
+
+        // Img element
+        ._image {
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+    }
+
+    // Caption container
+    &__banner-caption {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        color: $white;
+        font-weight: 600;
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // For large screens
+        @include above__phone {
+            font-size: 6rem;
+            padding: ($base-spacing-unit * 2);
+        }
+
+        // For mobile devices
+        @include phone {
+            font-size: 3.5rem;
+            padding: $base-spacing-unit;
+        }
+    }
+
+    // Card container
+    &__card-container {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    // Card overlay
+    &__card-overlay {
+        margin: 0 auto;
+        max-width: 650px;
+        position: relative;
+
+        background-color: $white;
+        box-shadow: 0 0 10px 4px rgba(#ccc, 0.5);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        padding: var(--top-space);
+        top: calc(#{var(--top-space)} * -1);
+
+        // For large screens
+        @include above__phone {
+            --top-space: 60px;
+        }
+
+        // For mobile devices
+        @include phone {
+            --top-space: 30px;
+        }
+
+        // Underline
+        &:after {
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: calc(var(--top-space) / 2);
+
+            // content: '';
+            height: 8px;
+            width: 65px;
+            background-color: $theme-orange;
+        }
+
+        // Heading
+        ._title {
+            font-weight: 500;
+            color: $dark-green;
+
+            // For large screens
+            @include above__phone {
+                font-size: 2rem;
+                margin-bottom: ($base-spacing-unit * 2);
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.2rem;
+                margin-bottom: ($base-spacing-unit * 1.5);
+            }
+        }
+
+        // Description text
+        ._description {
+            font-size: 15px;
+            text-align: center;
+            color: lighten($dark-green, 5%);
+
+            // For large screens
+            @include above__phone {
+                max-width: 85%;
+            }
+
+            // For mobile devices
+            @include phone {
+                max-width: 95%;
+            }
+        }
+    }
+
+    // Add-on text
+    &__add-on {
+        margin: 0 auto;
+        max-width: 650px;
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // For large screens
+        @include above__phone {
+            padding-bottom: 5rem;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding-bottom: 2rem;
+        }
+
+        ._title {
+            font-weight: 500;
+            color: $dark-green;
+
+            // For large screens
+            @include above__phone {
+                font-size: 2rem;
+                margin-bottom: ($base-spacing-unit * 2);
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.2rem;
+                margin-bottom: ($base-spacing-unit * 1.5);
+            }
+        }
+
+        // Description text
+        ._description {
+            font-size: 15px;
+            text-align: center;
+            color: lighten($dark-green, 5%);
+
+            // For large screens
+            @include above__phone {
+                max-width: 75%;
+            }
+
+            // For mobile devices
+            @include phone {
+                max-width: 95%;
+            }
+        }
+    }
+
+    // Journey section
+    &__journey-wrapper {
+        float: left;
+        width: 100%;
+
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin-bottom: $base-spacing-unit * 2;
+
+        // For large screens
+        @include above__phone {
+            padding: 5rem 0;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding: 2rem !important;
+        }
+    }
+
+    // Inner container
+    &__journey-container {
+        margin: 0 auto;
+        max-width: 1120px;
+
+        // For large screens
+        @include above__phone {
+            padding: 0 10px;
+        }
+    }
+
+    // Main card
+    &__journey {
+        position: relative;
+        background-color: $white;
+        padding: var(--left-card-padding);
+        box-shadow: 0px 0px 10px 4px rgba(#000, 0.4);
+
+        // For large screens
+        @include above__phone {
+            max-width: 500px;
+            --left-card-padding: 3rem;
+        }
+
+        // For mobile devices
+        @include phone {
+            --left-card-padding: 2rem;
+        }
+
+        // Top border
+        &:before {
+            position: absolute;
+            content: '';
+            z-index: 1;
+
+            width: 100px;
+            height: 15px;
+            background-color: $dark-green;
+
+            top: 0;
+            left: var(--left-card-spacing);
+        }
+
+        // Title
+        ._title {
+            font-weight: 500;
+            color: $dark-green;
+
+            // For large screens
+            @include above__phone {
+                font-size: 1.8rem;
+                margin-bottom: 1.2rem;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.4rem;
+                margin-bottom: 0.6rem;
+            }
+        }
+
+        // Descriptin
+        ._description {
+            line-height: 1.5;
+            color: $dark-green;
+
+            // For large screens
+            @include above__phone {
+                font-size: 14px;
+            }
+
+            // For mobile devices
+            @include phone {
+            }
+        }
+    }
+
+    // Brand History
+    &__history-wrapper {
+        float: left;
+        width: 100%;
+        padding: 0 1em;
+
+        // For large screens
+        @include above__phone {
+            padding-bottom: 6rem;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding-bottom: 0;
+        }
+    }
+
+    // Container
+    &__history-container {
+        // For large screens
+        @include above__phone {
+            margin: 0 auto;
+            max-width: 1100px;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+
+        // Header text
+        ._header {
+            color: #f0b67f;
+            position: relative;
+            font-size: 1.5rem;
+            padding-top: $base-spacing-unit * 2;
+
+            // For mobile devices
+            @include phone {
+                margin-bottom: $base-spacing-unit * 2;
+            }
+
+            // Top border
+            &:before {
+                position: absolute;
+                content: '';
+                z-index: 1;
+
+                width: 100px;
+                height: 15px;
+                background-color: #f0b67f;
+
+                top: 0;
+                left: 0;
+            }
+        }
+    }
+
+    // Content wrapper
+    &__hc-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $base-spacing-unit * 2;
+
+        // For mobile devices
+        @include phone {
+            flex-direction: column;
+        }
+
+        > div:first-child {
+            @include above--phone {
+                padding-right: 4em;
+            }
+        }
+    }
+
+    // Content
+    &__hc-content {
+        color: $white;
+
+        // For large screens
+        @include above__phone {
+            width: 50%;
+        }
+
+        // For mobile devices
+        @include phone {
+            order: 1;
+            width: 100%;
+        }
+
+        ._title {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: $base-spacing-unit;
+        }
+
+        ._description {
+            font-weight: 300;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: $base-spacing-unit * 2;
+        }
+    }
+
+    // Media
+    &__hc-media {
+        display: flex;
+
+        // For large screens
+        @include above__phone {
+            width: 50%;
+            margin-bottom: $base-spacing-unit * 3;
+        }
+
+        // For mobile devices
+        @include phone {
+            order: 0;
+            width: 100%;
+            margin-bottom: $base-spacing-unit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+// Team profile thumbs
+.tp {
+    // Main wrapper
+    &__thumbs-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+
+        // For large screens
+        @include above__phone {
+            margin: 0 -#{($base-spacing-unit)};
+        }
+
+        @include phone {
+            width: 100%;
+        }
+    }
+
+    // Preview text
+    &__preview {
+        display: flex;
+        color: $dark-green;
+        position: relative;
+
+        // For large screens
+        @include above__phone {
+            font-size: 2.4rem;
+            width: (100% / 3) * 1;
+            margin: $base-spacing-unit 0;
+            padding: 0 $base-spacing-unit;
+        }
+
+        // iPad portrait
+        @include tablet__portrait {
+            font-size: 3rem;
+        }
+
+        // For mobile devices
+        @include phone {
+            width: 100%;
+            font-size: 1.5rem;
+        }
+
+        > div {
+            // For large screens
+            @include above__phone {
+                max-width: 50%;
+                padding-top: $base-spacing-unit * 2;
+            }
+
+            @include tablet__portrait {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            // For mobile devices
+            @include phone {
+                float: left;
+                width: 100%;
+                padding: ($base-spacing-unit * 1) $base-spacing-unit / 2;
+            }
+        }
+
+        // First thumb
+        + .tp__thumb {
+            // For large screens
+            @include above__phone {
+                width: (100% / 3) * 2;
+
+                overflow: hidden;
+                max-height: 450px;
+            }
+
+            // For mobile devices
+            @include phone {
+                width: 100%;
+            }
+        }
+
+        // Overline
+        &:after {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            content: '';
+            width: 65px;
+            background-color: $dark-green;
+
+            // For large screens
+            @include above__phone {
+                height: 12px;
+                left: $base-spacing-unit;
+            }
+
+            // For mobile devices
+            @include phone {
+                height: 8px;
+                left: $base-spacing-unit / 2;
+            }
+        }
+    }
+
+    // Single item
+    &__thumb {
+        display: flex;
+        align-items: flex-end;
+
+        // For large screens
+        @include above__phone {
+            width: (100% / 3);
+            padding: 0 $base-spacing-unit;
+            margin: $base-spacing-unit 0;
+        }
+
+        // For mobile devices
+        @include phone {
+            width: (100% / 2);
+            padding: 0 ($base-spacing-unit / 2);
+            margin: ($base-spacing-unit / 2) 0;
+        }
+    }
+
+    // Inner item
+    &__thumb-item {
+        width: 100%;
+        display: flex;
+        position: relative;
+
+        // Alt BGs
+        &.bg-1:before {
+            background: linear-gradient(180deg, rgba($theme-orange, 0.3) 0%, rgba($theme-orange, 0.9) 100%);
+        }
+
+        &.bg-2:before {
+            background: linear-gradient(180deg, rgba($theme-primary, 0.3) 0%, rgba($theme-primary, 0.9) 100%);
+        }
+
+        &.bg-3:before {
+            background: linear-gradient(180deg, rgba($pd-green, 0.3) 0%, rgba($pd-green, 0.9) 100%);
+        }
+
+        &.bg-4:before {
+            background: linear-gradient(180deg, rgba(#f1b57f, 0.3) 0%, rgba(#f1b57f, 0.9) 100%);
+        }
+
+        // Bg
+        &:before {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: transparent !important;
+        }
+
+        // hover style
+        &:hover {
+            ._caption {
+                transform: translateY(-10px);
+            }
+        }
+
+        // Image
+        ._image {
+            width: 100%;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        // Caption
+        ._caption {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 150ms ease-in-out;
+
+            position: absolute;
+            z-index: 1;
+            bottom: 0;
+
+            // For large screens
+            @include above__phone {
+                padding: $base-spacing-unit * 2;
+            }
+
+            // For mobile devices
+            @include phone {
+                padding: $base-spacing-unit;
+            }
+        }
+
+        // Name
+        ._name {
+            font-weight: 600;
+            color: $white;
+            line-height: 1.4;
+
+            // For large screens
+            @include above__phone {
+                font-size: 2.4rem;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.2rem;
+            }
+        }
+
+        // Designation
+        ._designation {
+            color: $dark-green;
+
+            // For large screens
+            @include above__phone {
+                font-size: 1.2rem;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+// About full page
+.cms-about-us,
+.cms-apple-cove-farms,
+.cms-owner,
+.cms-page-view.page-layout-1column:not(.cms-department, .cms-departments) {
+    #maincontent {
+        padding: 20px 0 !important;
+
+        > .columns {
+            max-width: unset !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<?php if(!$block->isCustomerLoggedIn()): ?>
+<div class="hidden" id="aislend-alert-container">
+	<div class="aislend-alert-modal">
+		<div class="aislend-alert-wrapper">
+			<form data-role="aislend-guest-notofy-form">
+				<div class="input-wrappers">
+					<input name="email" type="email" placeholder="Email Address" data-validate="{required:true, 'validate-email':true}" value="" />
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+			"aislendAlert":{
+        		"loggedIn" : <?php echo $block->isCustomerLoggedIn() ? 1 : 0; ?>
+            },
+            "aislendAlertCheck":{}
+        }
+    }        
+</script>

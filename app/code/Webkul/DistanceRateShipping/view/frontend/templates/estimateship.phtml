@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Webkul Software
+ *
+ * @category    Webkul
+ * @package     Webkul_DistanceRateShipping
+ * @author      Webkul
+ * @copyright   Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license     https://store.webkul.com/license.html
+ */
+/** @var $block \Magento\Catalog\Block\Product\View */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getDrHelper();
+$data = $helper->getConfig();
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php
+if (($data['enable']==1) && ($data['productShipping']==1) &&
+ !in_array($_product->getTypeId(), ['virtual','downloadable'])) { ?>
+<div class="field qty" id="wkdrs-estimate-container">
+    <label class="label" for="qty"><span><?= $block->escapeHtml(__('Get Estimate Shipping Cost')) ?></span></label>
+    <div class="control">
+        <input type="text"
+            name="shippingAddress" style="width:75%"
+            id="wkdrs-address"
+            title="<?= $block->escapeHtmlAttr(__('Calculate')) ?>"
+            class="input-text wkdrs-address" />
+        <button type="button"
+            title="<?= $block->escapeHtmlAttr(__('Calculate')) ?>"
+            class="action primary wkdrs-calculate" id="wkdrs-calculate">
+            <span><?= $block->escapeHtmlAttr(__('Calculate')) ?></span>
+        </button>
+        <p id="wkdrs-shippingCost"></p>
+        <input type="hidden" value="<?= $block->escapeHtml($_product->getId());?>" id="wkdrs-productId">
+    </div>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?=
+/* @noEscape */ $data['googleApi'];
+?>&libraries=places"></script>
+<script type="text/x-magento-init">
+    {
+      "*": {
+           "shipping":{
+              "productid":"<?= $block->escapeHtml($_product->getId());?>",
+              "estimateurl":"<?= $block->escapeHtml($block->getUrl('distancerateshipping/product/productshipping'));?>"
+            }
+        }
+    }
+</script>
+<?php } ?>
+

@@ -1,0 +1,56 @@
+<div class="cc__gift-actions-toolbar _block">
+    <div class="_block cc__substitue-selection cc__instruction-relative">
+        <div class="substitue-selection cc__allow-substitute">
+            <label class="cc__allow-label" data-bind="{for: getAllowedName()}">
+                <input type="radio"
+                       data-bind="click: getSubstitute.bind($data,1, quoteid, itemid,'allowed_'), attr: {checked: isChecked(), name: getAllowedName(), id: getAllowedName()}"/>Allow
+                Substitute
+            </label>
+            <label class="cc__not-allow-label" data-bind="{for: getNotAllowedName()}">
+                <input type="radio"
+                       data-bind="click: getSubstitute.bind($data,0, quoteid, itemid,'notallowed_'), attr: {checked: isNotChecked(), name: getAllowedName(), id: getNotAllowedName()}"/>Do Not Allow Substitute
+            </label>
+        </div>
+    </div>
+    <div class="_block cc__instruction-textarea-wrapper" data-bind="attr: {id: getTextAreBoxId()}" style="display:none">
+        <div class="cc__instruction-textarea-container _block cc__instruction-relative">
+            <div class="_block">
+                <div class="substitue-text _block">
+                    <!--<span class="hide">Instruction</span>-->
+                    <textarea class="input-text cc__gift-textarea" rows="4"
+                              data-bind="value: getInstructionInfo(), attr: {value: getInstructionInfo()}"></textarea>
+                </div>
+                <div class="_block cc__instruction-btn-group">
+                    <button class="btn btn__default" type="button" data-bind="click: addInstruction">Save</button>
+                    <button class="btn btn__hollow" type="button" data-bind="click: cancelBox">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ko if: getInstructionInfo() -->
+    <div class="cc__instruction-summary _block cc__instruction-relative" data-bind="attr: {id: getEditTextId()}">
+        <div class="cc__gift-message-summary _block"
+             data-bind="text: getInstructionInfo()"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: getInstructionInfo() -->
+    <div class="" data-bind="attr: {id: getEditTextId()}">
+        <div class="cc__gift-message-summary _block"
+             data-bind="text: getInstructionInfo()"></div>
+    </div>
+    <!-- /ko -->
+    <div class="_block cc__secondary cc__instruction-relative">
+        <div class="secondary cc__gift-secondary">
+            <a class="cc__gift-edit cc__icon-instructions icon-instructions"
+               data-bind="click: isVisible, attr: {id: getTextAreBoId()}">
+                <span class="" data-bind="text: getInstructionText()"></span>
+            </a>
+            <div class="" data-bind="attr: {'class': getRemoveButton()}">
+                <a class="action delete-item-trigger action-delete cc__remove cc__clear-instruction"
+                   data-bind="click: getRemove.bind($data, itemid), text: 'Clear Instruction'"></a>
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,497 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/* @var $block \Magento\Catalog\Block\Product\AbstractProduct */
+?>
+<?php
+
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+switch ($type = $block->getType()) {
+
+    case 'related-rule':
+        if ($exist = $block->hasItems()) {
+            $type = 'related';
+            $class = $type;
+
+            $image = 'related_products_list';
+            $title = __('Related Products');
+            $items = $block->getAllItems();
+            $limit = $block->getPositionLimit();
+            $shuffle = (int)$block->isShuffled();
+            $canItemsAddToCart = $block->canItemsAddToCart();
+
+            $showAddTo = true;
+            $showCart = false;
+            $templateType = null;
+            $description = false;
+        }
+        break;
+
+    case 'related':
+        /** @var \Magento\Catalog\Block\Product\ProductList\Related $block */
+        if ($exist = $block->getItems()->getSize()) {
+            $type = 'related';
+            $class = $type;
+
+            $image = 'related_products_list';
+            $title = __('Related Products');
+            $items = $block->getItems();
+            $limit = 0;
+            $shuffle = 0;
+            $canItemsAddToCart = $block->canItemsAddToCart();
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = null;
+            $description = false;
+        }
+        break;
+
+    case 'upsell-rule':
+        if ($exist = $block->hasItems()) {
+            $type = 'upsell';
+            $class = $type;
+
+            $image = 'upsell_products_list';
+            $title = __('You May Also Like');
+            $items = $block->getAllItems();
+            $limit = $block->getPositionLimit();
+            $shuffle = (int)$block->isShuffled();
+
+            $showAddTo = false;
+            $showCart = false;
+            $templateType = null;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'upsell':
+        /** @var \Magento\Catalog\Block\Product\ProductList\Upsell $block */
+        if ($exist = count($block->getItemCollection()->getItems())) {
+            $type = 'upsell';
+            $class = $type;
+
+            $image = 'upsell_products_list';
+            $title = __('You May Also Like');
+            $items = $block->getItemCollection()->getItems();
+            $limit = $block->getItemLimit('upsell');
+            $shuffle = 0;
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = null;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'crosssell-rule':
+        /** @var \Magento\Catalog\Block\Product\ProductList\Crosssell $block */
+        if ($exist = $block->hasItems()) {
+            $type = 'crosssell';
+            $class = $type;
+
+            $image = 'cart_cross_sell_products';
+            $title = __('More Choices');
+            $items = $block->getItemCollection();
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'crosssell':
+        /** @var \Magento\Catalog\Block\Product\ProductList\Crosssell $block */
+        if ($exist = $block->getItemCount()) {
+            $type = 'crosssell';
+            $class = $type;
+
+            $image = 'cart_cross_sell_products';
+            $title = __('More Choices');
+            $items = $block->getItems();
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description = false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'new':
+        if ($exist = $block->getProductCollection()) {
+            $type = 'new';
+            $mode = 'grid';
+            $type = $type . ' ' . $mode;
+
+            $class = 'widget' . ' ' . $type;
+
+            $image = 'new_products_content_widget_grid';
+            $title = __('New Products');
+            $items = $exist;
+
+            $showAddTo = true;
+            $showCart = true;
+            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+            $description = ($mode == 'list') ? true : false;
+            $canItemsAddToCart = false;
+        }
+        break;
+
+    case 'other':
+        break;
+}
+?>
+
+<?php if ($exist): ?>
+    <?php
+
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $quickShopHelper = $this->helper('Codazon\QuickShop\Helper\Data');
+    $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+    $wishlistHelper = $this->helper('Magento\Wishlist\Helper\Data');
+    $labelHelper = $this->helper('Codazon\ProductLabel\Helper\Data');
+
+    $imageHelper = $this->helper('Magento\Catalog\Helper\Image');
+    $themeHelper = $this->helper('Codazon\ThemeLayoutPro\Helper\Data');
+    $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+    $wishlistHelper = $this->helper('Magento\Wishlist\Helper\Data');
+
+    $width = $themeHelper->getConfig('images/category/product_image_width') ?: 150;
+    $height = $themeHelper->getConfig('images/category/product_image_height') ?: 150;
+    $paddingBottom = $height * 100 / $width;
+    $cartWidget = $block->isRedirectToCartEnabled() ? '' : 'data-mage-init=\'{"catalogAddToCart":{}}\'';
+    $showWishlist = $showAddTo && (bool)($themeHelper->isDisplayOnList('wishlist'));
+    $showCompare = $showAddTo && (bool)($themeHelper->isDisplayOnList('compare'));
+    $showCart = $showCart && (bool)($themeHelper->isDisplayOnList('addtocart'));
+
+
+    /* show on list */
+    $showDescription = $themeHelper->isDisplayOnList('description');
+    $showSku = $themeHelper->isDisplayOnList('sku');
+    $showWishlist = $themeHelper->isDisplayOnList('wishlist');
+    $showCart = $themeHelper->isDisplayOnList('addtocart');
+    $showQuickShop = $themeHelper->isDisplayOnList('quickshop');
+    $showLabel = $themeHelper->isDisplayOnList('label');
+    $showThumb = $themeHelper->isDisplayOnList('thumb');
+    $showName = $themeHelper->isDisplayOnList('name');
+    $showReview = $themeHelper->isDisplayOnList('review');
+    $showPrice = $themeHelper->isDisplayOnList('price');
+
+    $widget = ['themewidgets' => [
+        'codazon.slider' => ['sliderConfig' => [
+            'dots' => false,
+            'lazyload' => true,
+            'margin' => 20,
+            'nav' => true,
+            'responsive' => $themeHelper->getSliderItemsPerRowArray()
+        ]]
+    ]];
+    ?>
+
+
+    <center>
+        <div class='mageplaza-autorelated-title block-title title custom__title _block'>
+            <h2 class="block-mageplaza-autorelated-heading" style="margin-top:30px;"><?php echo $title; ?></h2>
+        </div>
+    </center>
+
+    <?php
+    echo "<div class='products wrapper product-list-style-19 list-no-hover ctst grid products-grid container-small owl-carousel owl-loaded'>
+                        <!--Product list wrapper-->
+            <ol class='products list items product-items flex-grid pi__list recent__bought' data-sameheight='.product-item-details,.product-item-description,.product-item-name'>";
+    ?>
+    <?php $iterator = 1; ?>
+    <?php foreach ($items as $_item): ?>
+
+        <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $productpur = $objectManager->create('Magento\Catalog\Model\Product')->load($_item->getId());
+
+
+        // Start Custom Qty Dropdown by Prakash
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $productStockObj = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface')->getStockItem($productpur->getId());
+        $cWeight = $productStockObj->getIsQtyDecimal();
+        $type = ($cWeight == 'Yes') ? 'text' : 'number';
+        $lbOrnot = ($cWeight == 'Yes') ? 'per lb' : '';
+        $optionlb = ($cWeight == 'Yes') ? 'lb' : '';
+        $incressqty = ($cWeight == 'Yes') ? .25 : 1;
+
+        $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+        $addToCartUrl = $listBlock->getAddToCartUrl($productpur);
+        $formkey = $block->getBlockHtml('formkey');
+
+        if ($cWeight == 1) {
+
+            $customQty = "<div class='button-wrap pi__actions-wrapper cart-qty'>
+                <form data-product-sku='" . $productpur->getSku() . "'  id='product_addtocart_form-" . $productpur->getSku() . "' novalidate='novalidate' action='" . $addToCartUrl . "' method='post' data-role='tocart-form'>" . $formkey . "
+
+
+                        <div class='field qty'>
+
+
+
+
+                        <select class='field qty control product-qty-" . $productpur->getId() . "' name='qty'> 
+                                        <option value='0.25'>0.25lb</option>
+                                        <option value='0.5'>0.5lb</option>
+                                        <option value='0.75'>0.75lb</option>
+                                        <option value='1'>1lb</option>
+                                        <option value='2'>2lb</option>
+                                        <option value='3'>3lb</option>
+                                        <option value='4'>4lb</option>
+                                        <option value='5'>5lb</option>
+                                        <option value='6'>6lb</option>
+                                        <option value='7'>7lb</option>
+                                        <option value='8'>8lb</option>
+                                        <option value='9'>9lb</option>
+                                        <option value='10'>10lb</option>
+                                        <option isweight='1' product-id='" . $productpur->getId() . "' value='11' class='custom-option hidden'>More</option>
+                                        </select>
+                                         <div class='control custom-button-" . $productpur->getId() . " hidden'>
+                                        <div class='qty-ctl'>
+                                        <button type='button' data-action='addto-cart-deduct' title='Remove Product' class='action deductQty-" . $productpur->getId() . " decrease'>
+                                        </button>
+                                        </div>
+                                        <input type='hidden' id='incress-qty-box-" . $productpur->getId() . "' value='" . $incressqty . "' name='' class='qty-box'/>
+                                        <input type='" . $type . "' id='qty-box-" . $productpur->getId() . "' value='' name='' class='qty-box-" . $productpur->getId() . "'/>
+                                        <div class='qty-ctl'>
+                                        <button type='button' class='action addQty-" . $productpur->getId() . " increase' title='Add'></button>
+                                        </button>
+                                        </div>
+                                        </div>
+                                        </div>
+                                       
+                                        <button type='submit' title='Add to Cart' class='action tocart primary tocart-text pi__add'>
+                                                        <span class='_icon'></span>
+                                                        <span class='_text'>Add</span>
+                                                    </button>
+                                        </form></div>
+                                         ";
+        } else {
+
+            $customQty = "<div class='button-wrap pi__actions-wrapper cart-qty'><form data-role='tocart-form' data-product-sku='" . $productpur->getSku() . "'  id='product_addtocart_form-" . $productpur->getSku() . "' novalidate='novalidate' action='" . $addToCartUrl . "' method='post'>" . $formkey . "
+
+
+                   
+                        <div class='field qty'>
+                        <select class='field qty control product-qty-" . $productpur->getId() . "' name='qty'>
+                                        <option value='1'>1</option>
+                                        <option value='2'>2</option>
+                                        <option value='3'>3</option>
+                                        <option value='4'>4</option>
+                                        <option value='5'>5</option>
+                                        <option value='6'>6</option>
+                                        <option value='7'>7</option>
+                                        <option value='8'>8</option>
+                                        <option value='9'>9</option>
+                                        <option value='10'>10</option>
+                                        <option isweight='0' product-id='" . $productpur->getId() . "' value='11' class='custom-option hidden'>More</option>
+                                        </select>
+                                        <div class='control custom-button-" . $productpur->getId() . " hidden'>
+                                        <div class='qty-ctl'>
+                                        <button type='button' data-action='addto-cart-deduct' title='Remove Product' class='action deductQty-" . $productpur->getId() . " decrease'>
+                                        </button>
+                                        </div>
+                                        <input type='hidden' id='incress-qty-box-" . $productpur->getId() . "' value='" . $incressqty . "' name='' class='qty-box'/>
+                                        <input type='" . $type . "' id='qty-box-" . $productpur->getId() . "' value='' name='' class='qty-box-" . $productpur->getId() . "'/>
+                                        <div class='qty-ctl'>
+                                        <button type='button' class='action addQty-" . $productpur->getId() . " increase' title='Add'></button>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        
+                                        <button type='submit' title='Add to Cart' class='action tocart primary tocart-text pi__add'>
+                                                        <span class='_icon'></span>
+                                                        <span class='_text'>Add</span>
+                                                    </button>
+                                        </form></div>
+                                         ";
+        }
+        // End Custom Qty Dropdown by Prakash
+
+        $imageUrl = '/media/catalog/product' . $productpur->getImage();
+
+        ?>
+        <li class='item product product-item pi__wrapper'>
+            <div class="pi__card">
+
+                <!--Item Image-->
+                <?php echo "
+                <div class='product-item-top pi__image-wrapper'>
+                    <a href='" . $productpur->getProductUrl() . "' class='product photo product-item-photo'>
+                                    <span class='product-image-container'>
+                                        <span class='product-image-wrapper' style='padding-bottom: 65%;'>
+                                           <img class='product-image-photo main-img' src='" . $imageUrl . "' alt='" . $productpur->getName() . "'>
+
+                                        </span>
+                                    </span>
+                                </a>";
+
+                echo $showQuickShop ? $quickShopHelper->getQuickShopButton($productpur) : '';
+
+                $wishlistparampur = $this->helper("Magento\Wishlist\Helper\Data")->getAddParams($_item);
+                echo "                <div class='button-top-wrap'>
+                                            <a href='/wishlist/index/add/'
+                                               data-post='" . $wishlistparampur . "'
+                                               class='action towishlist' data-action='add-to-wishlist'
+                                               title='Add to Wish List'>
+                                                <span>Add to Wish List</span>
+                                            </a></div></div>";
+                ?>
+
+                <?php
+                echo "
+                        <!--Main content area-->
+                        <div class='product details product-item-details pi__details-wrapper' style='min-height: 176px;'>
+                            <div class='product-item-inner pi__info'>
+                                <!--Item name-->
+                                        <strong class='product name product-item-name _name' style='min-height: 80px;'>
+
+
+                                            <a href='" . $productpur->getProductUrl() . "' class='product-item-link'>" . $productpur->getName() . "</a>
+                                        </strong>
+
+                 ";
+                $priceFormattedpur = $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($productpur->getPrice(), 2), true, false);
+
+                $finalpriceFormattedpur = $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($productpur->getFinalPrice(), 2), true, false);
+
+                if ($finalpriceFormattedpur < $priceFormattedpur) {
+
+                    echo "
+
+                                        <div class='price-box price-final_price' data-role='priceBox' data-product-id='" . $productpur->getId() . "' data-price-box='product-id-" . $productpur->getId() . "'>
+                                            <span class='special-price'>
+                                            <span class='price-container price-final_price tax weee'>
+                                            <span class='price-label'>Special Price</span>
+                                            <span id='product-price-" . $productpur->getId() . "' data-price-amount='" . $finalpriceFormattedpur . "' data-price-type='finalPrice' class='price-wrapper '>
+                                                <span class='price'>" . $finalpriceFormattedpur . "</span>
+                                            </span>
+                                            </span>
+                                            </span>
+                                            <span class='old-price'>
+                                                <span class='price-container price-final_price tax weee'>
+                                                    <span class='price-label'>Regular Price</span>
+                                                <span id='old-price-" . $productpur->getId() . "' data-price-amount='" . $priceFormattedpur . "' data-price-type='oldPrice' class='price-wrapper '><span class='price'>" . $priceFormattedpur . "</span></span>
+                                                </span>
+                                            </span>
+                                        </div>
+
+                        ";
+
+
+                } else {
+                    echo "
+
+                                        <!--Item SKU-->
+                                         <div class='price-box price-final_price' data-role='priceBox' data-product-id='" . $productpur->getId() . "' data-price-box='product-id-" . $productpur->getId() . "'>
+                                            <span class='price-container price-final_price tax weee'>
+                                                <span id='product-price-" . $productpur->getId() . "' data-price-amount='0.69' data-price-type='finalPrice' class='price-wrapper '><span class='price'>" . $finalpriceFormattedpur . "</span></span>
+                                            </span>
+
+                                        </div>
+                        ";
+                }
+
+                echo $customQty;
+
+                ?>
+            </div>
+        </li>
+        <?php echo ($iterator == count($items) + 1) ? '</li>' : '' ?>
+    <?php endforeach ?>
+
+
+<?php endif; ?>
+
+<style>
+    .owl-item > .pi__wrapper {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .recent__bought {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    require(["jquery"], function ($) {
+        $(document).ready(function () {
+            let sid;
+            var interval = setInterval(() => {
+                $('.cart-quantity-summery,.cart-quantity,.incart_qty').addClass('hide');
+                $('.cart-item-qty').each(function () {
+                    var $span = $(this);
+                    sid = $span.attr('data-cart-item-id');
+
+                    $('#update_qty-' + sid).removeClass('hide');
+                    $('#summery-' + sid).removeClass('hide');
+                    $('#' + sid).removeClass('hide').text($(this).val());
+                    clearInterval(interval);
+                });
+            }, 5000);
+
+        });
+    });
+</script>
+<script>
+    require([
+        'jquery',
+        'owlslider'
+    ], function ($) {
+        $(".recent__bought").owlCarousel({
+            loop: false,
+            margin: 15,
+            nav: true,
+            dots: false,
+            responsive: {
+                0: {
+                    items: 1,
+                    margin: 5,
+                    dots: true
+                },
+                350: {
+                    items: 2,
+                    margin: 5,
+                    dots: true
+                },
+                640: {
+                    items: 2,
+                    margin: 5,
+                    dots: true
+                },
+                768: {
+                    items: 4
+                },
+                500: {
+                    items: 2
+                }
+            }
+        });
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "[data-role=tocart-form], .form.map.checkout": {
+            "catalogAddToCart": {}
+        }
+    }
+
+
+</script>
+

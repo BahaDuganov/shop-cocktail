@@ -1,0 +1,83 @@
+
+<script id="time-delivery-base-template" type="text/x-magento-template">
+    <div class="fieldset-wrapper admin__collapsible-block-wrapper opened" id="option_<%- data.id %>">
+        <input type="hidden" name="<?php echo $this->getFieldName().'[<%- data.id %>][entity_id]'; ?>" value="<%- data.entity_id %>">
+        <input id="<?php /* @escapeNotVerified */ echo $block->getFieldId() ?>_<%- data.id %>_is_delete" name="<?php /* @escapeNotVerified */ echo $block->getFieldName() ?>[<%- data.id %>][is_delete]" type="hidden" value=""/>
+        <table class="shipping_table" id="<%- data.id %>-content">
+        	<thead>
+				<tr class="wk_mp_headcus ul_first headings">
+					<th><span><?php echo __('Select Day') ?></span></th>
+					<th><span><?php echo __('Start Time') ?></span></th>
+					<th><span><?php echo __('End Time') ?></span></th>
+					<th><span><?php echo __('Quotas') ?></span></th>
+                    <th><span><?php echo __('Status') ?></span></th>
+					<th><span>
+						<button class="button action-delete" id="<?php /* @escapeNotVerified */ echo $block->getFieldId() ?>_<%- data.id %>_delete" title="Add" type="button">
+							<span>
+								<span><?php echo __('Delete') ?></span>
+							</span>
+						</button>
+					</span></th>
+				</tr>
+			</thead>
+            <tbody class="wk_mp_headcus wk-mp-body">
+                <tr class="shipbody" id="<?php /* @escapeNotVerified */ echo $block->getFieldId() ?>_<%- data.id %>">
+
+                    <td class="field field-option-input-type required">
+                        <div class="control opt-type">
+                            <?php echo $block->getDaysHtml() ?>
+                        </div>
+                    </td>
+                    <td class="field required time start-time">
+                        <div class="control opt-type">
+                            <input type="text" name="<?php echo $this->getFieldName().'[<%- data.id %>][start_time]'; ?>" class="admin__control-text text-center" id="<?php echo 'start_'.$this->getFieldId() . '_<%- data.id %>'?>" data-validate="{required:true}">
+                        </div>
+                    </td>
+                    <td class="field end-time time required">
+                        <div class="control opt-type">
+                            <input type="text" name="<?php echo $this->getFieldName().'[<%- data.id %>][end_time]'; ?>" class="admin__control-text text-center" id="<?php echo 'end_'.$this->getFieldId() . '_<%- data.id %>'?>" data-validate="{required:true}">
+                        </div>
+                    </td>
+                    <td class="slot-order time">
+	                    <div class="field required">
+	                        <div class="control opt-type">
+	                            <input id="<?php echo $this->getFieldId() . '_<%- data.id %>_quota' ?>" type="text" class="admin__control-text" data-validate="{required:true,'validate-number':true,'validate-zero-or-greater':true}" name="<?php echo $this->getFieldName().'[<%- data.id %>][order_count]' ?>">
+	                        </div>
+                        </div>
+                    </td>
+                    <td class="field field-option-input-type required">
+                        <div class="control opt-type">
+                            <?php echo $block->getStatusHtml() ?>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
+
+<script>
+require([
+    "jquery",
+    'jquery/jquery-ui-timepicker-addon',
+    "Webkul_TimeSlotDelivery/js/time-delivery-options"
+], function(jQuery){
+
+jQuery(function ($) {
+    var fieldSet = $('[data-block=time-delivery-options]');
+    fieldSet.timeDeliveryOptions(<?php /* @escapeNotVerified */ echo $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode(
+        [
+            'fieldId' => $block->getFieldId(),
+            'formKey' => $block->getFormKey(),
+            'itemCount' => $block->getItemCount()
+        ]
+    )?>);
+    //adding data to templates
+    <?php /** @var $_value \Magento\Framework\DataObject */ ?>
+    <?php foreach ($block->getTimeSlotsValue() as $_value): ?>
+        fieldSet.timeDeliveryOptions('addSlot', <?php /* @escapeNotVerified */ echo $_value->toJson() ?>);
+    <?php endforeach; ?>
+});
+
+});
+</script>

@@ -1,0 +1,340 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_FrequentlyBought
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\FrequentlyBought\Block\Product\ProductList\FrequentlyBought $block */
+
+$product = $block->getProduct();
+$productId = $product->getId();
+$items = $block->getItems();
+if ($block->isShow() && $items->getSize()) :?>
+    <hr>
+    <?php if ($title = $block->getTitleBlock()) : ?>
+        <div class="mageplaza-fbt-title block-title title">
+            <h2 id="block-mageplaza-fbt-heading"><?= $block->escapeHtml($title) ?></h2>
+        </div>
+    <?php endif; ?>
+
+    <div class="mageplaza-fbt-content">
+        <form id="mageplaza-fbt-form" method="post"
+              action="<?= $block->escapeUrl($block->getUrl('frequentlybought/cart/add')) ?>"
+              data-mage-init='{"validation": {}, "frequentlyBought": <?= /* @noEscape */$block->getJsonConfig() ?>}'>
+            <?= $block->getFormKeyHtml() ?>
+
+            <!--selected items-->
+            <div class="wrapper grid products-grid hidden">
+                <ol class="mageplaza-fbt-image-box">
+                    <li class="__static item product first-item product-item mageplaza-fbt-hidden mageplaza-fbt-item-<?= /* @noEscape */$productId ?>">
+                        <span><?= $block->getImage($product, 'product_thumbnail_image')->toHtml() ?></span>
+                    </li>
+                    <?php foreach ($items as $_item) : ?>
+                        <?php $itemId = $_item->getProductId() ?: $_item->getId() ?>
+                        <li class="__dynamic product-item-plus mageplaza-fbt-hidden mageplaza-fbt-plus-<?= /* @noEscape */ $itemId ?>">
+                            <?php if ($separateImage = $block->getSeparatorImage()) : ?>
+                                <img src="<?= $block->escapeUrl($separateImage) ?>" alt="+"/>
+                            <?php else : ?>
+                                <span>&#43;</span>
+                            <?php endif; ?>
+                        </li>
+                        <li class="item product product-item mageplaza-fbt-hidden mageplaza-fbt-item-<?= /* @noEscape */$itemId ?>">
+                            <span>
+                                <a href="<?= /* @noEscape */$block->getProductUrl($_item) ?>"
+                                   class="product photo product-item-photo mageplaza-fbt-url-product">
+                                    <?= $block->getImage($_item, 'product_thumbnail_image')->toHtml() ?>
+                                </a>
+                            </span>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+                <!--Clear div-->
+                <div class="mp-clear"></div>
+                <!--Clear div-->
+            </div>
+            <!--selected items-->
+
+            <!--Frequently bought custom layout-->
+            <div class="fbt__wrapper">
+                <!--list of items-->
+                <div class="mageplaza-fbt-rows fbt__items">
+                    <ul class="fbt__item-list">
+                        <li class="fbt__item">
+                            <input type="checkbox" class="related-checkbox"
+                                   data-mageplaza-fbt-product-id="<?= /* @noEscape */$productId ?>"
+                                   data-price-amount="<?= /* @noEscape */$block->getPriceAmount($product) ?>"
+                                   id="mageplaza-fbt-checkbox-<?= /* @noEscape */$productId; ?>"
+                                   name="mageplaza_fbt[<?= /* @noEscape */ $productId ?>]"<?= (!$product->getIsSalable()) ? 'disabled="disabled"' : '' ?> />
+
+                            <label for="mageplaza-fbt-checkbox-<?= /* @noEscape */$productId; ?>"
+                                   class="mageplaza-fbt-checkbox-label fbt__item-detail">
+                                <span class="_image">
+                                    <!--Product image-->
+                                    <?= $block->getImage($product, 'product_thumbnail_image')->toHtml() ?>
+                                </span>
+
+                                <span class="_content">
+                                    <!--name of item-->
+                                     <span class="mageplaza-fbt-name-<?= /* @noEscape */$productId; ?> _name">
+                                         <?= $block->escapeHtml($product->getName()) ?>
+                                     </span>
+
+                                    <!--price of item-->
+                                     <span class="item-price mageplaza-fbt-price-<?= /* @noEscape */$productId ?>"
+                                           data-price-amount="<?= /* @noEscape */$block->getPriceAmount($product) ?>">
+                                        <?= /* @noEscape */$block->getPriceWithCurrency($block->getPriceAmount($product)) ?>
+                                    </span>
+
+                                    <!--Other scenarios-->
+                                    <?php if (!$product->getIsSalable()) : ?>
+                                        <span class="mageplaza-fbt-out-of-stock">
+                                            <?= /* @noEscape */__('Out of stock') ?>
+                                        </span>
+                                    <?php endif; ?>
+                                    <?php if (!$block->usePopup()) : ?>
+                                        <span class="mageplaza-fbt-detail"></span>
+                                    <?php endif; ?>
+                                </span>
+                            </label>
+                        </li>
+
+                        <?php foreach ($items as $_item) : ?>
+                            <?php $itemId = $_item->getProductId() ?: $_item->getId(); ?>
+                            <?php $isSalable = $_item->getData('is_salable'); ?>
+                            <li class="fbt__item">
+                                <input type="checkbox" class="related-checkbox"
+                                       data-mageplaza-fbt-product-id="<?= /* @noEscape */ $itemId ?>"
+                                       data-price-amount="<?= /* @noEscape */ $block->getPriceAmount($_item); ?>"
+                                       id="mageplaza-fbt-checkbox-<?= /* @noEscape */ $itemId ?>"
+                                       name="mageplaza_fbt[<?= /* @noEscape */ $itemId ?>]" <?= (!$isSalable) ? 'disabled="disabled"' : '' ?> />
+
+                                <label for="mageplaza-fbt-checkbox-<?= /* @noEscape */$itemId ?>"
+                                       class="mageplaza-fbt-checkbox-label fbt__item-detail">
+
+                                    <!--Product image-->
+                                    <span class="_image">
+                                         <?= $block->getImage($_item, 'product_thumbnail_image')->toHtml() ?> 
+                                    </span>
+
+                                    <!--Product details-->
+                                    <span class="_content">
+                                        <!--Product name-->
+                                        <span class="_name"><?= $block->escapeHtml($_item->getName()) ?></span>
+
+                                        <!--Product price-->
+                                         <span class="item-price mageplaza-fbt-price-<?= /* @noEscape */$itemId ?>"
+                                               data-price-amount="<?= /* @noEscape */$block->getPriceAmount($_item) ?>">
+                                            <?= /* @noEscape */$block->getPriceWithCurrency($block->getPriceAmount($_item)); ?>
+                                        </span>
+
+                                        <!--Other scenario(s)-->
+                                        <?php if (!$isSalable) : ?>
+                                            <span class="mageplaza-fbt-out-of-stock">
+                                                <?= /* @noEscape */ __('Out of stock') ?>
+                                            </span>
+                                        <?php endif; ?>
+                                        <?php if (!$block->usePopup()) : ?>
+                                            <span class="mageplaza-fbt-detail"></span>
+                                        <?php endif; ?>
+                                    </span>
+                                </label>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
+                <!--Add button-->
+                <div class="fbt__action_wrapper">
+                    <!--Add action-->
+                    <div class="mageplaza-fbt-price-box">
+                        <div class="mageplaza-fbt-total-price">
+                        <span class="mageplaza-fbt-total-price-label">
+                            <?= /* @noEscape */__('Total price:') ?>
+                        </span>
+                            <span data-price-amount="0" class="mageplaza-fbt-price-wrapper">
+                            <span class="mageplaza-fbt-price">
+                                <?= /* @noEscape */ $block->getPriceWithCurrency(0) ?>
+                            </span>
+                        </span>
+                        </div>
+                        <div class="mageplaza-fbt-buttons">
+                            <div class="mageplaza-fbt-add-to-cart">
+                                <button type="submit" title="<?= /* @noEscape */__('Add selected to cart') ?>" class="action primary mpfbt-tocart">
+                                <span>
+                                    <?= /* @noEscape */ __('Add selected to cart') ?>
+                                </span>
+                                </button>
+                            </div>
+                            <?php if ($block->getShowWishList()) : ?>
+                                <div class="mageplaza-fbt-add-to-wishlist">
+                                    <button type="submit" title="<?= /* @noEscape */__('Add selected to wishlist') ?>"
+                                            data-url="<?= /* @noEscape */$block->getUrl('frequentlybought/wishlist/add') ?>">
+                                        <span><?= /* @noEscape */__('Add selected to wishlist') ?></span>
+                                    </button>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <!--Add action-->
+                </div>
+            </div>
+            <!--Frequently bought custom layout-->
+        </form>
+    </div>
+    <hr>
+
+    <?php if ($block->usePopup()) : ?>
+        <a href="#mpfbt-popup" id="mpfbt-open-popup" style="display: none"></a>
+        <div id="mpfbt-popup" class="white-popup mfp-hide">
+            <div id="mpfbt-popup-main">
+                <form id="mageplaza-fbt-form-popup" method="post"
+                      action="<?= $block->escapeUrl($block->getUrl('frequentlybought/cart/add')) ?>"
+                      data-mage-init='{"validation": {}, "FbtAjaxCart": <?= /* @noEscape */ $block->getJsonConfig() ?>}'>
+                    <div id="mageplaza-fbt-formkey-popup">
+                        <?= $block->getFormKeyHtml() ?>
+                    </div>
+                    <div id="mpfbt-popup-content">
+                        <table data-role="grid">
+                            <thead>
+                            <tr>
+                                <th><span><?= /* @noEscape */__('Thumbnail') ?></span></th>
+                                <th><span><?= /* @noEscape */__('Name') ?></span></th>
+                                <th><span><?= /* @noEscape */__('Price') ?></span></th>
+                                <th><span><?= /* @noEscape */__('Options') ?></span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="mpfbt-popup-product-detail" data-mpfbt-popup-product-id="<?= /* @noEscape */$productId ?>">
+                                <input type="hidden" class="mpfbt-product-input"
+                                       id="mpfbt-product-input-<?= /* @noEscape */$productId ?>"
+                                       data-mpfbt-popup-product-id="<?= /* @noEscape */$productId ?>"
+                                       data-price-amount="<?= /* @noEscape */$block->getPriceAmount($product) ?>"
+                                       name="mageplaza_fbt[<?= /* @noEscape */ $productId ?>]" value=""/>
+                                <td>
+                                    <div>
+                                        <a href="<?= /* @noEscape */$block->getProductUrl($product) ?>">
+                                            <span><?= $block->getImage($product, 'product_thumbnail_image')->toHtml() ?></span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <a href="<?= /* @noEscape */$block->getProductUrl($product) ?>">
+                                            <span><?= $block->escapeHtml($product->getName()) ?></span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <span class="item-price mageplaza-fbt-price-<?= /* @noEscape */$productId ?>"
+                                              data-price-amount="<?= /* @noEscape */$block->getPriceAmount($product); ?>">
+                                            <?= /* @noEscape */$block->getPriceWithCurrency($block->getPriceAmount($product)); ?>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div
+                                            class="fieldset mageplaza-fbt-option-product mageplaza-fbt-option-wrapper-<?= /* @noEscape */$productId ?>">
+                                            <?= /* @noEscape */$block->getOptionWrapper($productId) ?>
+                                        </div>
+                                        <div
+                                            class="fieldset mageplaza-fbt-option-product mageplaza-fbt-custom-option-<?= /* @noEscape */$productId ?>">
+                                            <?= /* @noEscape */$block->getCustomOption($productId) ?>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php foreach ($items as $_item) : ?>
+                                <?php $itemId = $_item->getProductId() ?: $_item->getId() ?>
+                                <tr class="mpfbt-popup-product-detail" data-mpfbt-popup-product-id="<?= /* @noEscape */$itemId ?>">
+                                    <input type="hidden" class="mpfbt-product-input"
+                                           id="mpfbt-product-input-<?= /* @noEscape */$itemId ?>"
+                                           data-mpfbt-popup-product-id="<?= /* @noEscape */$itemId ?>"
+                                           data-price-amount="<?= /* @noEscape */$block->getPriceAmount($_item) ?>"
+                                           name="mageplaza_fbt[<?= /* @noEscape */ $itemId ?>]" value=""/>
+                                    <td>
+                                        <div>
+                                            <a href="<?= /* @noEscape */$block->getProductUrl($_item) ?>">
+                                                <span><?= $block->getImage($_item, 'product_thumbnail_image')->toHtml(); ?></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <a href="<?= /* @noEscape */$block->getProductUrl($_item) ?>">
+                                                <span><?= $block->escapeHtml($_item->getName()) ?></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                        <span class="item-price mageplaza-fbt-price-<?= /* @noEscape */$itemId ?>"
+                                              data-price-amount="<?= /* @noEscape */$block->getPriceAmount($_item) ?>">
+                                            <?= /* @noEscape */$block->getPriceWithCurrency($block->getPriceAmount($_item)); ?>
+                                        </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div
+                                                class="fieldset mageplaza-fbt-option-product mageplaza-fbt-option-wrapper-<?= /* @noEscape */$itemId ?>">
+                                                <?= /* @noEscape */$block->getOptionWrapper($itemId) ?>
+                                            </div>
+                                            <div
+                                                class="fieldset mageplaza-fbt-option-product mageplaza-fbt-custom-option-<?= /* @noEscape */$itemId ?>">
+                                                <?= /* @noEscape */$block->getCustomOption($itemId) ?>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mpfbt-total-items">
+                        <span class="mpfbt-total-items-label">
+                            <?= /* @noEscape */__('Total Selected Items:') ?>
+                        </span>
+                        <span class="mpfbt-total-items-value"></span>
+                    </div>
+                    <div class="mageplaza-fbt-price-box">
+                        <div class="mageplaza-fbt-total-price">
+                            <span class="mageplaza-fbt-total-price-label">
+                                <?= /* @noEscape */__('Total price:') ?>
+                            </span>
+                            <span data-price-amount="0" class="mageplaza-fbt-price-wrapper">
+                                <span class="mageplaza-fbt-price">
+                                    <?= /* @noEscape */$block->getPriceWithCurrency(0) ?>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mpfbt-actions">
+                        <button type="submit" title="Continue shopping" class="action primary mpfbt-btn-continue">
+                            <span><?= /** @noEscape */__('Continue shopping') ?></span>
+                        </button>
+                        <button type="submit" title="Add All To Cart" class="action primary" id="mpfbt-btn-addtocart">
+                            <span><?= /** @noEscape */__('Add All To Cart') ?></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

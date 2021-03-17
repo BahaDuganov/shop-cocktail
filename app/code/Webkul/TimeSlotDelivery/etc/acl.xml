@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Magento_Backend::stores">
+					<resource id="Magento_Backend::stores_settings">
+						<resource id="Magento_Config::config">
+							<resource id="Webkul_TimeSlotDelivery::config_webkul_timeslotdelivery" title="time_slots_delivery"/>
+						</resource>
+					</resource>
+				</resource>
+				<resource id="Webkul_TimeSlotDelivery::TimeSlots" sortOrder="10" title="TimeSlots">
+					<resource id="Webkul_TimeSlotDelivery::manage" title="Manage Delivery TimeSlots" sortOrder="50">
+						<resource id="Webkul_TimeSlotDelivery::TimeSlots_save" sortOrder="10" title="Save TimeSlots"/>
+						<resource id="Webkul_TimeSlotDelivery::TimeSlots_delete" sortOrder="20" title="Delete TimeSlots"/>
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

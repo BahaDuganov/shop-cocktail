@@ -1,0 +1,14 @@
+{
+    "name": "freento/progressbar",
+    "description": "Output a progress bar reflecting the client's subtotal basket",
+    "require": {
+        "magento/module-checkout": ">=100.2.0",
+        "magento/framework": ">=101.0.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": { "Freento\\Progressbar\\": "" },
+        "files": [ "registration.php" ]
+    }
+}

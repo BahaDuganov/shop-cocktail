@@ -1,0 +1,83 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
+$attribute = $_product->getResource()->getAttribute('ingredients')->getFrontend()->getValue($_product);
+?>
+<?php if ($attribute != ''): ?>
+    <?php
+    $q = urlencode($attribute);
+    $queryText = $q;
+    $queryText .= '&maxResult=4&start=4';
+    $adminUrl = 'http://api.yummly.com/v1/api/recipes?_app_id=9fdbac04&_app_key=8503201214ca5236b8118c72a43b9c4e&q=' . $q . $queryText;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $adminUrl);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $result = json_decode(curl_exec($ch), true);
+    $recipeCollection = $result['matches'];	
+    ?>
+	
+	<?php if (count($recipeCollection) > 0): ?>
+    <div class="recipe__related-porducts-list _block">
+        <div class="recommendation__title bm30">
+            <strong>Related Recipes</strong>
+        </div>
+        <div class="related-products recipe__related-porducts _block">            
+                <div class="products wrapper cp__products-wrapper column main cp__product-items">
+                    <ol class="products list items product-items cp__list-wrapper">
+                        <?php foreach ($recipeCollection as $recipes) {
+                            $recipeId = $recipes['id'];
+                            $q = $_GET['q'];
+                            ?>
+                            <?php //print_r($recipes);?>
+                            <li class="item product product-item cp__list-item">
+                                <div class="product-item-info product__card">
+                                    <?php if (substr($q, -3) == "%2F") $q = substr($q, 0, -3); ?>
+                                    <a href="<?php echo $this->getUrl("") . 'aislendRecipe/recipe/index/recipe-id/' . $recipeId . '?q=' . $q; ?>"
+                                       class="product photo product-item-photo product__img-anchor">
+                                        <img src="<?php echo str_replace("s90-c", "s375-c", $recipes['imageUrlsBySize'][90]); ?>">
+                                    </a>
+                                    <div class="product details product-item-details product__card-details product__recipe-card-details">
+                                        <strong class="product name product-item-name product__item-title product__recipe-item-title">
+                                            <a href="<?php echo $this->getUrl("") . 'aislendRecipe/recipe/index/recipe-id/' . $recipeId . '?q=' . $q; ?>"
+                                               class="product-item-link product__recipe-item-link"><?php echo($recipes['recipeName']); ?>
+                                            </a>
+                                        </strong>
+                                        <div class="product__tags-container">
+                                            Dessert, Friots, Pies, Cakes &amp; Tarts, Thanksgiving
+                                        </div>
+                                        <div class="product__serving-time">
+                                            <?php
+                                            $hour = floor($recipes['totalTimeInSeconds'] / 3600);
+                                            $minute = floor(($recipes['totalTimeInSeconds'] / 60) % 60);
+                                            $time = '';
+                                            if ($hour > 0):
+                                                $time .= $hour;
+                                            endif;
+                                            if ($minute > 0):
+                                                $time .= ($hour > 0) ? ':' : '';
+                                                $time .= $minute;
+                                                $time .= ' Min';
+                                            endif;
+                                            if ($hour > 0 && $minute == 0):
+                                                $time .= ($hour > 1) ? ' Hrs' : ' Hr';
+                                            endif;
+                                            ?>
+                                            <div class="product__prep-time">
+                                                <?php echo $time; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    </ol>
+                </div>            
+        </div>
+        <div class="_block text-center">
+            <a class="btn btn__default ingredient__add-btn" href="#"
+               target="_blank">Browse More Recipes</a>
+        </div>
+    </div>
+	<?php endif; ?>
+<?php endif; ?>

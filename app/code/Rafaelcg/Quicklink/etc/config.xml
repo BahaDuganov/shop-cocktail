@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+  ~  @author Rafael Corrêa Gomes <rafaelcgstz@gmail.com>
+  ~  @copyright Copyright (c) 2019.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <quicklink>
+            <general>
+                <active>1</active>
+                <timeout>500</timeout>
+                <request_limit>10</request_limit>
+                <concurrency_limit>2</concurrency_limit>
+                <priority>0</priority>
+            </general>
+        </quicklink>
+    </default>
+</config>

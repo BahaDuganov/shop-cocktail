@@ -1,0 +1,212 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Update Cart'); ?>
+<?php
+//Start Custom Qty Dropdown by Prakash
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productStockObj = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface')->getStockItem($_product->getId());
+$productQty = $productStockObj->getQty();
+//$productMinQty =  $productStockObj->getMinQty();
+
+$cWeight = $productStockObj->getIsQtyDecimal();
+
+if ($cWeight == 1) {
+    $cWeight = "Yes";
+    $productMinQty = .25;
+} else {
+    $cWeight = "No";
+    $productMinQty = 0;
+}
+
+$qtyArray = 0;
+$checkQty = ($productQty > 0 && $productQty > $productMinQty) ? ($productQty - $productMinQty) : 0;
+//$cWeight = $_product->getResource()->getAttribute('custom_weight_drop_down')->getFrontend()->getValue($_product);
+$customOption = '';
+if ($checkQty > 0 && $checkQty > 10):
+    $qtyArray = 10;
+    $moreValue = ($cWeight == 'Yes') ? 8 : 11;
+    $customOption = '<option value=' . $moreValue . ' class="custom-option">More</option>';
+elseif ($checkQty > 0 && $checkQty <= 10):
+    $qtyArray = $checkQty;
+endif;
+$lbsText = '';
+$type = ($cWeight == 'Yes') ? 'text' : 'number';
+$lbOrnot = ($cWeight == 'Yes') ? 'per lb' : '';
+$optionlb = ($cWeight == 'Yes') ? 'lb' : '';
+$incressqty = ($cWeight == 'Yes') ? .25 : 1;
+
+//End Custom Qty Dropdown by Prakash
+?>
+<?php if ($_product->isSaleable()) :?>
+    <div class="box-tocart update">
+        <fieldset class="fieldset">
+            <?php if ($block->shouldRenderQuantity()) :?>
+            <div class="field qty">
+                <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+                <div class="control">
+                    <?php /* ?>
+                    <div class="cart-qty">
+                        <div class="qty-ctl">
+                            <button title="<?= __('Decrease') ?>" type="button" data-role="change_cart_qty" class="decrease" data-qty="-1" class="decrease"></button>
+                        </div>
+                        <input type="number"
+                               name="qty"
+                               id="qty"
+                               min="0"
+                               value=""
+                               title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                               class="input-text qty"
+                               data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"/>
+                        <div class="qty-ctl">
+                            <button title="<?= __('Increase') ?>" type="button" data-role="change_cart_qty" data-qty="1" class="increase"></button>
+                        </div>
+
+
+                    </div>
+                     <?php */ ?>
+
+                      <?php
+                    //Start Custom Qty Dropdown by Prakash
+                    if ($_product->getTypeId() == 'configurable'): ?>
+                        <?php
+                        $_children = $_product->getTypeInstance()->getUsedProductIds($_product);
+                        $assoCiatedPro = $_children[0];
+                        $productStockObj = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface')->getStockItem($assoCiatedPro);
+                        $associtedQty = $productStockObj->getQty();
+                        $customOption = '';
+                        $moreValue = 11;
+                        if ($associtedQty > 10):
+                            $associtedQty = 10;
+                            $customOption = '<option value=' . $moreValue . ' class="custom-option">More</option>';
+                        endif;
+                        ?>
+                        <select class="control product-qty" name="qty">
+                            <?php for ($i = 1; $i <= $associtedQty; $i++): ?>
+                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <?php endfor; ?>
+                            <?php echo $customOption; ?>
+                        </select>
+                    <?php else: ?>
+                        <select class="control product-qty" name="qty">
+                            <?php if ($qtyArray > 0): $temp = 1; ?>
+                                <?php for ($i = 1; $i <= $qtyArray; $i++): ?>
+                                    <?php
+                                    $calQty = $i;
+                                    if ($cWeight == 'Yes') {
+                                        $calQty = ($i < 5) ? $i / 4 : ++$temp;
+                                    }
+                                    ?>
+                                    <option
+                                        value="<?php echo $calQty; ?>"><?php echo $calQty . $optionlb; ?></option>
+                                <?php endfor; ?>
+                                <?php echo $customOption; ?>
+                            <?php endif; ?>
+                        </select>
+                    <?php endif; ?>
+                    <div class='control custom-button hidden qty__counter'>
+                        <div class="qty-ctl">
+                            <button type='button'
+                                    data-action="addto-cart-deduct"
+                                    title='Remove Product'
+                                    class='action deductQty decrease'>
+                            </button>
+                        </div>
+                        <input type='hidden'
+                               id='incress-qty-box'
+                               value="<?php echo $incressqty; ?>" name=''
+                               class='qty-box'/>
+                        <input type='<?php echo $type; ?>'
+                               id='qty-box'
+                               value="" name='' class='qty-box'/>
+                        <div class="qty-ctl">
+                            <button type='button'
+                                    class='action addQty increase'
+                                    title='Add'></button>
+                        </div>
+                    </div>
+                    <?php //End Custom Qty Dropdown by Prakash ?>
+                     
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                        class="action primary tocart"
+                        id="product-updatecart-button">
+                    <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                </button>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
+        </fieldset>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "validation": {},
+                "addToCart": {
+                    "cartButtonId": "#product-updatecart-button",
+                    "cartForm": "#product_addtocart_form"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>
+<script>
+    //Start Custom Qty Dropdown by Prakash
+    require([
+        "jquery",
+    ], function ($) {
+        'use strict';
+        $(document).ready(function () {
+
+            var cWeight = '<?php echo $cWeight; ?>';
+            $(document).on("change click", "select.product-qty", function (event) {
+                var optionSelected = $(this).find("option:selected");
+                var setVal = (cWeight == 'Yes') ? .25 : 1;
+                if (optionSelected.attr('class') == 'custom-option') {
+                    $(".product-qty").addClass('hidden');
+                    $(".custom-button").removeClass('hidden');
+                    $('#qty-box').val(optionSelected.attr('value'));
+                    $('#qty-box').attr("name", "qty");
+                } else {
+                    $('#qty-box').attr("name", "");
+                    $('#incress-qty-box').attr("name", "");
+                }
+                var textSelected = optionSelected.attr('class');
+
+            });
+
+            $(document).on('click', '.addQty', function () {
+                var incressVal = (cWeight == 'Yes') ? .25 : 1;
+
+                if ($('input#qty-box').val() >= incressVal) {
+
+                    var afterAddQty = (incressVal == 1) ? parseInt($('input#qty-box').val()) : parseFloat($('input#qty-box').val());
+                    incressVal = afterAddQty + incressVal;
+                    incressVal = (incressVal == .25) ? incressVal.toFixed(2) : incressVal;
+                }
+                $('input#qty-box').val(incressVal);
+            });
+            $(document).on('click', '.deductQty', function () {
+                var decressVal = (cWeight == 'Yes') ? .25 : 1;
+                if ($('input#qty-box').val() >= decressVal) {
+
+                    var afterDeductQty = (decressVal == 1) ? parseInt($('input#qty-box').val()) : parseFloat($('input#qty-box').val());
+                    decressVal = afterDeductQty - decressVal;
+                    decressVal = (decressVal == .25) ? decressVal.toFixed(2) : decressVal;
+                }
+                $('input#qty-box').val(decressVal);
+            });
+        });
+        return;
+    });
+    //End Custom Qty Dropdown by Prakash
+</script>

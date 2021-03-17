@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Aislend_OrderManager::parent" title="OrderManager" module="Aislend_OrderManager" sortOrder="100" resource="Aislend_OrderManager::parent"/>
+        <add id="Aislend_OrderManager::index" title="OrderManager Index" module="Aislend_OrderManager" sortOrder="10" action="ordermanager/index" resource="Aislend_OrderManager::index" parent="Aislend_OrderManager::parent"/>
+		
+    </menu>
+</config>

@@ -1,0 +1,66 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Checkout
+ */
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<?php
+echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('order_success_app_download')
+    ->toHtml();
+?>
+<div class="checkout-success" id="thank-you-order-detail">
+    <?php if ($block->getOrderId()) : ?>
+        <div class="ty__block">
+            <div class="ty__order-success">
+                <div class="_title">Your Order is placed successfully!</div>
+                <div class="_sub-title">
+                    <?= $block->escapeHtml(__('We\'ll email you an order confirmation with details and tracking info.')) ?>
+                </div>
+
+                <div class="_order-details">
+                    <?php if ($block->getCanViewOrder()) : ?>
+                        <div class="_info">
+                            <span><?= $block->escapeHtml(__('Your Order#')) ?></span>
+                            <a href="<?= /* @noEscape */
+                            $block->getViewOrderUrl() ?>" class="order-number">
+                                <?= /* @noEscape */
+                                $block->getOrderId() ?>
+                            </a>
+                        </div>
+
+                        <div class="_info">
+                            <span><?= $block->escapeHtml(__('Order Date')) ?></span>
+                            <a href="<?= /* @noEscape */ $block->getViewOrderUrl() ?>" class="order-date">
+                                <?= $block->escapeHtml($block->formatDate($block->getCreatedAt(), \IntlDateFormatter::LONG)) ?>
+                            </a>
+                        </div>
+
+                    <?php else : ?>
+                        <div class="_info">
+                            <span><?= $block->escapeHtml(__('Your order # is:')) ?></span>
+                            <span class="order-number"><?= /* @noEscape */ $block->getOrderId() ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+        <?= $block->getChildHtml('details') ?>
+    <?php endif; ?>
+
+    <?= $block->getAdditionalInfoHtml() ?>
+    <?= $block->getChildHtml('cms') ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?= /* @noEscape */
+            $block->getUrl() ?>">
+                <span><?= $block->escapeHtml(__('Continue Shopping')) ?></span>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<?php
+/**
+ * Shopping cart totals template
+ *
+ * @var $block \Freento\Progressbar\Block\Progressbar
+ */
+?>
+
+<?php if ($block->isConfigured()) : ?>
+    <div class="progress-bar-container">
+        <div class="progress-bar-percent" style="width: <?= $block->escapeHtml($block->getPercent())?>%">&nbsp;</div>
+        <div class="progress-bar-text"><?= $block->escapeHtml($block->getProgressbarText()) ?></div>
+    </div>
+<?php endif;?>

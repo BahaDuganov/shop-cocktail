@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job instance="Aislend\OrderManager\Cron\OrderProcess" method="execute" name="ordermanager_orderprocess_cronjob">
+			<schedule>* * * * *</schedule>
+		</job>
+
+		<job instance="Aislend\OrderManager\Cron\ScheduleToToday" method="execute" name="ordermanager_ScheduleToToday_cronjob">
+			<schedule>0 8 * * *</schedule>
+		</job>
+        <job instance="Aislend\OrderManager\Cron\CheckInNotify" method="execute" name="ordermanager_CheckInNotify_cronjob">
+            <schedule>* * * * *</schedule>
+        </job>
+	</group>
+</config>

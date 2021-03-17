@@ -1,0 +1,137 @@
+.awt {
+    // Main wrapper
+    &__wrapper {
+        max-width: 1200px !important;
+    }
+
+    // Main header
+    &__header {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: clamp(25px, ($vw-base * 60), 60px) 0;
+
+        h1 {
+            font-weight: 600;
+            text-align: center;
+            color: $heading-color;
+            font-size: clamp(28px, ($vw-base * 50), 50px);
+        }
+    }
+
+    // List item
+    &__list {
+        display: grid;
+        grid-gap: 30px;
+        margin-bottom: ($base-spacing-unit * 2);
+
+        // For large screens
+        @include above__phone {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        // For mobile devices
+        @include phone {
+            text-align: center;
+            grid-template-columns: 1fr;
+        }
+
+        ._media {
+            // For mobile devices
+            @include phone {
+                order: 0;
+            }
+
+
+            img {
+                width: 100%;
+            }
+        }
+
+        ._content {
+            // For large screens
+            @include above__phone {
+                padding-top: ($base-spacing-unit * 1);
+            }
+
+            // For mobile devices
+            @include phone {
+                order: 1;
+            }
+
+            h4 {
+                color: $theme-primary;
+                font-size: clamp(22px, ($vw-base * 40), 40px);
+            }
+
+            p {
+                font-size: 15px;
+            }
+        }
+
+        ._name {
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 5px;
+
+            font-size: 25px;
+            font-weight: 600;
+
+            // Underline
+            &:after {
+                position: absolute;
+                z-index: 1;
+                bottom: 0;
+
+                content: '';
+                height: 10px;
+                width: 65px;
+                background-color: $heading-color;
+
+                // For large screens
+                @include above__phone {
+                    left: 0;
+                }
+
+                // For mobile devices
+                @include phone {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+
+        ._designation {
+            color: $heading-color;
+            margin-bottom: $base-spacing-unit;
+
+            font-weight: 600;
+            font-size: clamp(28px, ($vw-base * 60), 60px);
+        }
+
+        p {
+            color: $heading-color;
+        }
+    }
+}
+
+.awt__hobbies {
+    .tp__hobby-item {
+        // For large screens
+        @include above__phone {
+            width: 50%;
+            margin-bottom: $base-spacing-unit;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+    }
+}
+
+.banner-text-a ._action {
+    color: $white !important;
+}
+.mabt__neighbor.amish._alt-clr > .application-container {
+    max-width: 1100px;
+}

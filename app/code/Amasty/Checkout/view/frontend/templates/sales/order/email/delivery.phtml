@@ -1,0 +1,46 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Checkout
+ */
+?>
+<?php /** @var \Amasty\Checkout\Block\Sales\Order\Email\Delivery $block */ ?>
+<?php if ($fields = $block->getDeliveryDateFields()) : ?>
+    <table class="order-info-box">
+        <tr>
+            <td class="order-info">
+                <span class="space-top-15"></span>
+                <h4 class="m-0"><?= $block->escapeHtml(__('Delivery Date Info')) . ':'; ?></h4>
+            </td>
+        </tr>
+        <tr>
+            <?php foreach ($fields as $field) : ?>
+                <td class="order-info">
+                    <span class="space-top-15"></span>
+                    <h4 class="m-0"><label><?= $block->escapeHtml(__($field['label'])); ?></label></h4>
+                    <p><?= $block->escapeHtml($field['value']); ?></p>
+                </td>
+            <?php endforeach; ?>
+        </tr>
+    </table>
+
+    <table class="order-details" style="display: none;">
+        <thead>
+        <tr>
+            <td class="address-details">
+                <h3><?= $block->escapeHtml(__('Delivery Date Info')) . ':'; ?></h3>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($fields as $field) : ?>
+            <tr>
+                <td><label><?= $block->escapeHtml(__($field['label'])); ?></label></td>
+                <td><?= $block->escapeHtml($field['value']); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <br/><br/>
+<?php endif; ?>

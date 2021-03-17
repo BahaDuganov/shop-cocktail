@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+		<section id="time_slots_delivery" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Delivery Time Slots</label>
+            <tab>webkul</tab>
+			<resource>Webkul_TimeSlotDelivery::config_webkul_timeslotdelivery</resource>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>General Setting</label>
+				<field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enable</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="allowed_days" translate="label" type="multiselect" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Allowed Days for Delivery</label>
+                    <source_model>Webkul\TimeSlotDelivery\Model\Config\Source\Days</source_model>
+                </field>
+                <field id="maximum_days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Display Total Numner of Days</label>
+                    <validate>validate-zero-or-greater</validate>
+                    <comment>Enter number of days, e.g: 7</comment>
+                </field>
+                <field id="process_time" translate="label comment" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Minimum Required Time in Order Process</label>
+                    <validate>validate-zero-or-greater</validate>
+                    <comment>Enter number of days, e.g: 5</comment>
+                </field>
+                <field id="message" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Delivery Slot Not Available Error.</label>
+                </field>
+			</group>
+		</section>
+	</system>
+</config>

@@ -1,0 +1,30 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Checkout
+ */
+?>
+<?php /** @var $block Amasty\Checkout\Block\Onepage\Success\Details */ ?>
+<div id="thank-you-delivery-details" class="ty__block ty__order-details">
+     <?= $block->getChildHtml('info') ?>
+</div>
+<div class="account ty__block ty__order-items" id="thank-you-delivery-info">
+    <div class="column main">
+        <div class="block block-order-details">
+            <div class="_title">
+                <?= $block->escapeHtml(__('Items Ordered')) ?>
+            </div>
+
+            <div class="order-date-delivery" id="thank-you-delivery-dates">
+                <?= $block->getChildHtml('delivery') ?>
+                <span class="delivery-date"><?= $block->escapeHtml($block->getDeliveryInfo()) ?></span>
+            </div>
+        </div>
+
+
+
+        <?= $block->getChildHtml('order_view') ?>
+        <?= $block->getChildHtml('comments') ?>
+    </div>
+</div>

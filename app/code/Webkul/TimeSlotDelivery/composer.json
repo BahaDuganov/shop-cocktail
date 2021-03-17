@@ -1,0 +1,28 @@
+{
+    "name": "webkul/module-timeslotdelivery",
+    "description": "Magento Time Slots Delivery Module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Webkul "
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0",
+        "magento/module-store": "100.1.*",
+        "magento/module-customer": "100.1.*",
+        "magento/module-backend": "100.1.*",
+        "magento/framework": "100.1.*",
+        "magento/module-ui": "100.1.*"
+    },
+    "version": "2.0.0",
+    "autoload": {
+        "psr-4": {
+            "Webkul\\TimeSlotDelivery\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

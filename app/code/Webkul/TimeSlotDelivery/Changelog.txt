@@ -1,0 +1,15 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ Admin can create multiple time slots.
+	+ Admin can delete created time slots.
+	+ Admin can enable/disable each time slot. 
+	+ Buyer can select delivery time according to his/her choice on checkout page.
+	+ Admin can allow the days to display on checkout page.
+	+ Admin can set the minimum number of days interval for process order.
+	+ Admin can set number of days to display on checkout.
+	+ Admin can set error message if no time slots available.

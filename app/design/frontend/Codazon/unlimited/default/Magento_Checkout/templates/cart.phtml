@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $block \Magento\Checkout\Block\Cart
+ */
+
+if ($block->getItemsCount()) {
+    // phpcs:ignore Magento2.Security.LanguageConstruct.DirectOutput
+    echo $block->getChildHtml('with-items');
+} else {
+    // phpcs:ignore Magento2.Security.LanguageConstruct.DirectOutput
+    echo $block->getChildHtml('no-items');
+}
+
+?>
+
+<script>
+        //Start Custom Qty Dropdown by Prakash
+require([
+    "jquery",
+], function ($) {
+    'use strict';
+    $(document).ready(function(){ 
+
+       
+          var productId = '';
+           var cWeight = '';
+              var incressVal = '';
+                var afterAddQty = '';
+         $(document).on('click','.addQty',function () { 
+          var productId = $(this).attr("productid");
+           var cWeight = $(this).attr("cWeight");
+                   
+            var incressVal = (cWeight == 'Yes') ? .25 : 1;  
+            
+
+            if($('input#cart-' + productId + '-qty').val() >= incressVal){
+
+                var afterAddQty = (incressVal == 1) ? parseInt($('input#cart-' + productId + '-qty').val()) : parseFloat($('input#cart-' + productId + '-qty').val());
+               
+                incressVal = afterAddQty + incressVal;
+                 console.log(afterAddQty); 
+                incressVal = (incressVal == .25) ? incressVal.toFixed(2) : incressVal;
+            }         
+            $('input#cart-' + productId + '-qty').val(incressVal);
+            $(".action.update").css("background-color", "red");
+            $(".action.update").css("color", "white");
+         });
+        
+
+         $(document).on('click','.deductQty',function () { 
+          var productId = $(this).attr("productid");
+           var cWeight = $(this).attr("cWeight");         
+            var decressVal = (cWeight == 'Yes') ? .25 : 1; 
+            if($('input#cart-' + productId + '-qty').val() >= decressVal){
+
+                var afterDeductQty = (decressVal == 1) ? parseInt($('input#cart-' + productId + '-qty').val()) : parseFloat($('input#cart-' + productId + '-qty').val());
+                decressVal = afterDeductQty - decressVal;
+                decressVal = (decressVal == .25) ? decressVal.toFixed(2) : decressVal;
+            }
+            $('input#cart-' + productId + '-qty').val(decressVal);
+               $(".action.update").css("background-color", "red");
+            $(".action.update").css("color", "white");
+         });
+    });
+    return;
+});
+    //End Custom Qty Dropdown by Prakash
+</script>

@@ -1,0 +1,32 @@
+<!-- ko if: isGiftCardEnable() -->
+<div class="amcard-codes-list">
+    <!-- ko foreach: getRegion('messages') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <!-- ko foreach: applyCodes().split(',')  -->
+    <!-- ko if: $data.length > 0 -->
+    <div>
+        <span data-bind="text: $data"></span>
+        <button class="amcard-delete" data-bind="text: $t('Remove'), attr: {title: $t('Remove')}, click: $parent.removeSelected.bind($parent, $data), 'value': $data"></button>
+    </div>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>
+<div class="amcard-field-container -cart checkout__coupon-wrapper">
+    <span class="amcard-title amcheckout-title" data-bind="i18n: 'Apply Gift Card Code'"></span>
+
+    <div class="checkout__coupon-content">
+        <div class="amcard-field-block -double -code">
+            <input type="text" class="amcard-field" data-validate="{'required-entry':true}" data-bind="attr: {placeholder: $t('Enter your Code')}, value: cardCode"/>
+            <input type="button" class="amcard-button" data-bind="click: apply.bind($data), attr: {value: $t('Add Code')}"/>
+        </div>
+        <button class="amcard-check" data-bind="i18n: 'Check Status', click: check.bind($data)"></button>
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: isCart -->
+<div data-bind="scope: 'amcard-cart-render'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<!-- /ko -->

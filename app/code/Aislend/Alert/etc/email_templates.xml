@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="aislend_alert_email_stock_template" label="Stock Alert" file="guest_alert.html" type="html" module="aislend_Alert" area="frontend"/>
+</config>

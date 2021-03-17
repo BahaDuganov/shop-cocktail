@@ -1,0 +1,80 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "version": "2.2.2",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+        "composer/composer": "@alpha",
+        "firebase/php-jwt": "^5.2",
+        "flancer32/mage2_ext_csp": "^0.0.4",
+        "magento/composer-root-update-plugin": "~1.0",
+        "magento/product-community-edition": "2.3.5-p1",
+        "mageplaza/module-core": "^1.4",
+        "stripe/stripe-php": "^7",
+        "thaiphan/magento2-s3": "^2.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "~2.10.0",
+        "lusitanian/oauth": "~0.8.10",
+        "pdepend/pdepend": "2.5.2",
+        "phpmd/phpmd": "@stable",
+        "phpunit/phpunit": "~6.2.0",
+        "sebastian/phpcpd": "~3.0.0",
+        "squizlabs/php_codesniffer": "3.2.2"
+    },
+    "config": {
+        "use-include-path": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/",
+            "Zend\\Mvc\\Controller\\": "setup/src/Zend/Mvc/Controller/"
+        },
+        "psr-0": {
+            "": "app/code/"
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
+        }
+    },
+    "minimum-stability": "alpha",
+    "prefer-stable": true,
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "mirasvit-ssu2": {
+            "type": "composer",
+            "url": "https://34414:NITXUZA1E3@packages.mirasvit.com/34414:NITXUZA1E3/"
+        },
+        "mirasvit-fpc2": {
+            "type": "composer",
+            "url": "https://35302:8SLNJ9KHW2@packages.mirasvit.com/"
+        },
+        "mirasvit-advr2": {
+            "type": "composer",
+            "url": "https://36169:ONG05CLSY7@packages.mirasvit.com/"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

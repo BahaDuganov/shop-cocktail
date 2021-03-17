@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add action="timeslots/timeslots/index" id="Webkul_TimeSlotDelivery::manage" module="Webkul_TimeSlotDelivery" parent="Webkul_TimeSlotDelivery::menu" resource="Webkul_TimeSlotDelivery::manage" sortOrder="1" title="Manage Delivery TimeSlots"/>
+		<add id="Webkul_TimeSlotDelivery::menu" title="Menu" module="Webkul_TimeSlotDelivery" sortOrder="10" parent="Webkul_TimeSlotDelivery::TimeSlots" resource="Webkul_TimeSlotDelivery::TimeSlots"/>
+		<add id="Webkul_TimeSlotDelivery::TimeSlots" title="Delivery Time Slots" module="Webkul_TimeSlotDelivery" sortOrder="20" resource="Webkul_TimeSlotDelivery::TimeSlots" />
+	</menu>
+</config>

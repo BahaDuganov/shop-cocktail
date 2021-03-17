@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+     <preference for="Magento\Checkout\Controller\Cart\Add" type="Aislend\Checkout\Controller\Cart\Add" />
+     <preference for="Magento\Checkout\Controller\Cart\Delete" type="Aislend\Checkout\Controller\Cart\Delete" />
+     <preference for="Magento\Checkout\Controller\Cart\UpdatePost" type="Aislend\Checkout\Controller\Cart\UpdatePost" />
+     <preference for="Magento\Checkout\Controller\Index\Index" type="Aislend\Checkout\Controller\Index\Index" />     
+     <!-- <preference for="Magento\Checkout\Controller\Sidebar\RemoveItem" type="Aislend\Checkout\Controller\Sidebar\RemoveItem" />     
+     <preference for="Magento\Checkout\Controller\Sidebar\UpdateItemQty" type="Aislend\Checkout\Controller\Sidebar\UpdateItemQty" />     
+     <preference for="Magento\Checkout\Model\Sidebar" type="Aislend\Checkout\Model\Sidebar" />   -->   
+</config>

@@ -1,0 +1,8 @@
+{
+   "http-basic": {
+      "repo.magento.com": {
+         "username": "6ce93093f8c1494713c482f7168422fd",
+         "password": "0949f111e523b5b5dff8cfdcf35c05f5"
+      }
+   }
+}

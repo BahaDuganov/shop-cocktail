@@ -1,0 +1,21 @@
+<?php
+$product_id = $_GET['id'];
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->create('Magento\Catalog\Model\Product')->load($product_id);
+
+echo "<style>body{ background-color:#ffffff}.mob-shortDescription .page_heading {font-weight:600;font-size:15px;margin-top:15px}";
+echo ".mob-nutritions > div {margin-bottom:15px}";
+echo ".product__detail-description {letter-spacing: normal}";
+echo ".nutrition__list-wrapper {flex-direction:row;flex-wrap:wrap;justify-content:end;margin:0 0 30px}";
+echo ".nutrition__list-wrapper li {padding:0;flex:none;-webkit-flex:none;-ms-flex:none}";
+echo ".nutrition__list-wrapper li .nutrition__item {width:88px;height:88px}";
+echo "@media screen and (min-width: 375px) and (max-width: 410px){.nutrition__list-wrapper li .nutrition__item{width:102px;height:102px}}";
+echo "@media screen and (min-width: 411px) and (max-width: 420px){.nutrition__list-wrapper li .nutrition__item{width:115px;height:115px}}";
+echo ".nutrition__list-wrapper li .nutrition__item-value {font-size:16px}</style>";
+echo "<div class='mob-shortDescription'><p class='page_heading'>DESCRIPTION</p>".$product->getShortDescription()."</div>";
+echo "<div class='mob-nutritions'>".$product->getResource()->getAttribute("short_description2")->getFrontend()->getValue($product)."</div>";
+$hd_product = $product->getResource()->getAttribute('hd_product')->getFrontend()->getValue($product);
+if($hd_product != 'Yes'){
+echo "<div class='mob-hdContent'>".$product->getDescription()."</div>";
+}
+?>

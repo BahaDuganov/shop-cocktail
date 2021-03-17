@@ -1,0 +1,84 @@
+<div class="ingredient__wrapper _block">
+    <ul class="_flex _block ingredient__header ingredient__list">
+        <li class="_flex _block ingredient__header-list  ingredient__list-item">
+            <div class="ingredient__header-primary ingredient__primary">
+                <div class="ingredient__header-add-to-cart ingredient__add-to-cart">Add to cart</div>
+                <div class="ingredient__header-item-name ingredient__item-name">Item</div>
+            </div>
+            <div class="ingredient__header-secondry ingredient__secondry">
+                <div class="ingredient__header-suggestion ingredient__suggestion">Suggestion</div>
+                <div class="ingredient__price-and-quantity">
+                    <div class="ingredient__header-price ingredient__price">Price</div>
+                    <div class="ingredient__header-quantity ingredient__quantity">Quantity</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul class="_flex _block ingredient__body  ingredient__list" data-bind="foreach: productList">
+        <!-- ko if: selectedProduct.status -->
+        <li>
+            <span>Ingredients not available</span>
+        </li>
+        <!-- /ko -->
+        <!-- ko ifnot: selectedProduct.status -->
+        <li class="_block _flex ingredient__body-list ingredient__list-item" data-bind="attr: {id: ingredients}">
+            <div class="ingredient__body-primary ingredient__primary">
+                <div class="ingredient__body-add-to-cart ingredient__add-to-cart">
+                    <div class="btn__toggle">
+                        <!-- ko if: selectedProduct.outofstock == true -->
+                        <input type="checkbox" class="checkbox btn__toggle-input" id=""
+                               data-bind="attr: {id: checkboxId, value: selectedProduct.productId, price: selectedProduct.price_check}"/>
+                        <!-- /ko -->
+                        <!-- ko if: selectedProduct.outofstock == false -->
+                        <input type="checkbox" class="checkbox btn__toggle-input" id="" disabled/>
+                        <!-- /ko -->
+                        <label for="" data-bind="attr: {for: checkboxId}" class="btn__toggle"></label>
+                    </div>
+                </div>
+                <div class="ingredient__body-item ingredient__item-name" data-bind="text: ingredientsName"></div>
+            </div>
+            <div class="ingredient__body-secondry ingredient__secondry">
+                <div class="ingredient__body-suggestion ingredient__suggestion">
+                    <div class="ingredient__product">
+                        <div class="ingredient__product-image">
+                            <a data-bind="attr: {href: selectedProduct.productUrl}">
+                                <img data-bind="attr: {src: selectedProduct.src}" width="60" height="150"
+                                     alt="Product Image">
+                            </a>
+                        </div>
+                        <div class="ingredient__product-content">
+							<a data-bind="attr: {href: selectedProduct.productUrl}">
+								<div class="ingredient__product-name" data-bind="text: selectedProduct.name"></div>
+							</a>
+                            <div class="ingredient__product-options">
+                                <!-- ko if: selectedProduct.outofstock == false -->
+                                <div class="ingredient__product-name">Out Of Stock</div>
+                                <!-- /ko -->
+                                <!-- ko if: selectedProduct.outofstock == true -->
+                                <a id="jute_popup" class="modal-list" href="javascript:void(0);"
+                                   data-bind="text: more_option, click: $parent.getText"></a>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ko if: selectedProduct.outofstock == true -->
+                <div class="ingredient__price-and-quantity">
+                    <div class="ingredient__body-price ingredient__price" data-bind="text: selectedProduct.price"></div>
+                    <div class="ingredient__body-quantity ingredient__quantity">
+
+                        <div class="qty__add-substract qty__minus-plus">
+                            <button type="button" class="qty__substract qty__minus">-</button>
+                            <input type="number" value="1" size="3" maxlength="3"
+                                   data-bind="attr: {name: selectedProduct.qty}"
+                                   class="ingredient__input qty__qty-input" disabled>
+                            <button type="button" class="qty__add qty__plus">+</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>

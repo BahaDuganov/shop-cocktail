@@ -1,0 +1,89 @@
+Back,Back
+"Delete Timeslots","Delete Timeslots"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Save and Continue Edit","Save and Continue Edit"
+"Save Timeslots","Save Timeslots"
+ID,ID
+"#Order Id","#Order Id"
+"Grand Total (Purchased)","Grand Total (Purchased)"
+"Delivery Date","Delivery Date"
+Action,Action
+"View Order","View Order"
+Webkul,Webkul
+Timeslots,Timeslots
+"You deleted the Timeslots.","You deleted the Timeslots."
+"We can't find a Timeslots to delete.","We can't find a Timeslots to delete."
+"This Timeslot no longer exists.","This Timeslot no longer exists."
+"Edit Timeslot","Edit Timeslot"
+"New Timeslot","New Timeslot"
+"Delivery Time Slots","Delivery Time Slots"
+"Please correct the data sent.","Please correct the data sent."
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"This Timeslots no longer exists.","This Timeslots no longer exists."
+"You saved the Timeslots.","You saved the Timeslots."
+"Something went wrong while saving the Timeslots.","Something went wrong while saving the Timeslots."
+"Closing time can not be less than Opening time.","Closing time can not be less than Opening time."
+Sunday,Sunday
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Saturday,Saturday
+"'0' .","'0' ."
+Enabled,Enabled
+Disabled,Disabled
+"Could not save the timeSlots: %1","Could not save the timeSlots: %1"
+"TimeSlots with id ""%1"" does not exist.","TimeSlots with id ""%1"" does not exist."
+"Could not delete the TimeSlots: %1","Could not delete the TimeSlots: %1"
+Edit,Edit
+Delete,Delete
+"Delete ""${ $.$data.title }""","Delete ""${ $.$data.title }"""
+"Are you sure you wan't to delete a ""${ $.$data.title }"" record?","Are you sure you wan't to delete a ""${ $.$data.title }"" record?"
+"Delivery Inforamtion","Delivery Inforamtion"
+"Delivery Date: ","Delivery Date: "
+"Delivery Time: ","Delivery Time: "
+Items,Items
+Qty,Qty
+Price,Price
+"Slected Delivery Slot","Slected Delivery Slot"
+"Delivery Date:","Delivery Date:"
+"Delivery Time:","Delivery Time:"
+"Gift Message for this Order","Gift Message for this Order"
+From:,From:
+To:,To:
+Message:,Message:
+SKU,SKU
+"Delivery Date/Day: ","Delivery Date/Day: "
+"Gift Message","Gift Message"
+"Delivery Information","Delivery Information"
+"Delivery Time","Delivery Time"
+"Delivery Day: ","Delivery Day: "
+Date/Day,Date/Day
+Shipping,Shipping
+"Save Address","Save Address"
+Cancel,Cancel
+"Delivery Time Slots Configuration","Delivery Time Slots Configuration"
+"General Setting","General Setting"
+Enable,Enable
+"Allowed Days","Allowed Days"
+"Display Total Days","Display Total Days"
+"Minimum Required Time in Order Process","Minimum Required Time in Order Process"
+"Enter number of days, e.g: 5","Enter number of days, e.g: 5"
+"Error Message if Time Slots not available.","Error Message if Time Slots not available."
+"General Information","General Information"
+"Time Slot Configuration","Time Slot Configuration"
+"Delivery Day","Delivery Day"
+"Slot Opening Time","Slot Opening Time"
+"Slot Closing Time","Slot Closing Time"
+"Order Quotas","Order Quotas"
+Status,Status
+"Time Slot Orders","Time Slot Orders"
+"Add New TimeSlot","Add New TimeSlot"
+"Are you sure you wan't to delete?","Are you sure you wan't to delete?"
+"Change status","Change status"
+Disable,Disable
+"Start Time","Start Time"
+"End Time","End Time"
+"Allowed Orders","Allowed Orders"

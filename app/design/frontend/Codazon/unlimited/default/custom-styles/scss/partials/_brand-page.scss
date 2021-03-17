@@ -1,0 +1,325 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.brand {
+    // Banner caption container
+    &__banner-caption {
+        width: 100%;
+        padding: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        position: absolute;
+        z-index: 11;
+        bottom: 2em;
+        left: 50%;
+        transform: translateX(-50%);
+
+        // For large screens
+        @include above__phone {
+            max-width: 1400px;
+        }
+
+        // For mobile devices
+        @include phone {
+            flex-direction: column-reverse;
+        }
+
+        // Text
+        ._text {
+            color: $white;
+            font-weight: 300;
+
+            // For large screens
+            @include above__phone {
+                font-size: 3rem;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.5rem;
+                text-align: center;
+                margin-top: $base-spacing-unit;
+            }
+        }
+
+        // Logo
+        ._logo {
+            max-width: 100px;
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+    // Banner wrapper
+    &__banner-wrapper {
+        margin-bottom: 0;
+    }
+
+    // Banner image
+    &__banner-image {
+        &:before {
+            background: linear-gradient(0deg, rgba($dark-green, 1) 0%, rgba($dark-green, 0.2) 100%);
+        }
+    }
+
+    // Journey box
+    &__journey {
+        margin-left: 0;
+    }
+
+    // Intro section wrapper
+    &__intro-wrapper {
+        width: 100%;
+
+        // For mobile devices
+        @include phone {
+            padding: 0 $base-spacing-unit;
+        }
+
+        // hack
+        + .abt__journey-wrapper .abt__journey-container {
+            // For large screens
+            @include above__phone {
+                max-width: 1400px;
+            }
+        }
+    }
+
+    // Inner container
+    &__intro-container {
+        width: 100%;
+        margin: 0 auto;
+
+        // For large screens
+        @include above__phone {
+            max-width: 1400px;
+            padding: 0 10px 5rem;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding-bottom: 2rem;
+        }
+
+
+        // Header section
+        > header {
+            float: left;
+            position: relative;
+            padding-top: $base-spacing-unit * 2;
+
+            font-size: 1rem;
+            font-weight: 600;
+            color: $theme-orange;
+
+            // For large screens
+            @include above__phone {
+                width: 100%;
+                margin-bottom: 3rem;
+            }
+
+            // For mobile devices
+            @include phone {
+            }
+
+            // Top border
+            &:before {
+                position: absolute;
+                content: '';
+                z-index: 1;
+
+                width: 100px;
+                height: 15px;
+                background-color: $theme-orange;
+
+                top: 0;
+                left: 0;
+            }
+        }
+
+        // Inner container
+        > section {
+            width: 100%;
+            display: flex;
+            color: $dark-green;
+            align-items: center;
+
+            // For mobile devices
+            @include phone {
+                flex-direction: column-reverse;
+            }
+        }
+
+
+        // Left section
+        ._left {
+            // For large screens
+            @include above__phone {
+                width: 50%;
+            }
+
+            // Heading
+            h4 {
+                font-weight: 600;
+                font-size: 1.2rem;
+                margin-bottom: $base-spacing-unit;
+            }
+
+            // description
+            p {
+                font-size: 16px;
+                font-weight: 300;
+                line-height: 1.5;
+            }
+        }
+
+        // Right section
+        ._right {
+            font-weight: 300;
+            font-style: italic;
+            text-align: center;
+
+            // For large screens
+            @include above__phone {
+                width: 50%;
+                font-size: 1.7rem;
+
+                padding: 0 5rem;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.4rem;
+                padding: 2rem;
+            }
+        }
+    }
+}
+
+
+.ph {
+    // Main wrapper
+    &__wrapper {
+        float: left;
+        width: 100%;
+        background-color: $white;
+
+        // For large screens
+        @include above__phone {
+            padding: 3rem 0;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+    }
+
+    &__container {
+        width: 100%;
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+
+        // For large screens
+        @include above__phone {
+            max-width: 1400px;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding: 2em 1em;
+            flex-direction: column;
+        }
+    }
+
+    // Media
+    &__media-wrapper {
+        // For large screens
+        @include above__phone {
+            width: 50%;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    // Content wrapper
+    &__content-wrapper {
+        color: $dark-green;
+
+        // For large screens
+        @include above__phone {
+            width: 50%;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+
+        h4 {
+            font-weight: 600;
+            font-size: 1.6rem;
+            margin-bottom: $base-spacing-unit;
+        }
+
+        p {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        // product info
+        ._info {
+            margin-top: $base-spacing-unit * 2;
+
+            // For mobile devices
+            @include phone {
+                text-align: center;
+            }
+        }
+
+        ._name {
+            // For large screens
+            @include above__phone {
+                font-weight: 600;
+                font-size: 1rem;
+                margin-bottom: $base-spacing-unit / 2;
+            }
+        }
+
+        ._price {
+            font-size: 18px;
+            color: $light-grey;
+            margin-bottom: $base-spacing-unit / 2;
+        }
+
+        ._action {
+            color: $theme-orange;
+            background-color: $white;
+            text-decoration: none;
+
+            margin: ($base-spacing-unit / 2) 0;
+            padding: 1em 2.5em;
+            border-radius: 30px;
+            display: inline-flex;
+            box-shadow: 0px 0px 10px 4px rgba(#ccc, 0.5);
+            transition: all 150ms ease-in-out;
+
+            &:hover {
+                color: $white;
+                background-color: $theme-orange;
+            }
+        }
+    }
+}

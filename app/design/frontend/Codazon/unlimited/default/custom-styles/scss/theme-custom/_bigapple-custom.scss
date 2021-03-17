@@ -1,0 +1,205 @@
+.banner-text-a ._action {
+    color: $white !important;
+    background-color: $alt-color;
+
+    &:hover {
+        color: $alt-color !important;
+    }
+}
+
+// Home page section title
+.hm__section-title, .cdz-block-title .b-title.h2 {
+    // For large screens
+    @include above__phone {
+        text-align: left;
+        margin-bottom: ($base-spacing-unit * 1);
+        font-size: clamp(24px, ($vw-base * 30), 30px);
+    }
+}
+
+.page-header {
+    box-shadow: 0 0 10px 4px rgba(#ccc, 0.5);
+}
+
+select {
+    background-image: url('data:image/svg+xml;utf8,<svg height="24" fill="%232A3439" viewBox="0 0 48 48" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/><path d="M0-.75h48v48h-48z" fill="none"/></svg>');
+}
+
+[class*='product-list-style'] .action.tocart {
+    box-shadow: 0 0 10px 4px rgba(#ccc, 0.5);
+}
+
+.pi__card {
+    border: 1px solid #e5e5e5;
+}
+
+body select {
+    border-color: lighten($alt-color, 40%);
+}
+
+.page-footer .service-banner-style02 .item {
+    border-color: transparent !important;
+}
+
+.page-footer .block.newsletter .action.subscribe {
+    color: $alt-color;
+
+    &:hover {
+        color: $alt-color !important;
+        background-color: darken($white, 5%) !important;
+    }
+}
+
+.page-footer .footer-social a {
+    background-color: transparent;
+}
+
+#back-top a {
+    color: $alt-color !important;
+
+    &:hover {
+        color: $alt-color !important;
+        background-color: darken($white, 10%);
+    }
+}
+
+.sidebar-cart-inner .cart-trigger {
+    color: $alt-color;
+}
+
+.sidebar-cart-inner .cart-trigger .summary-count-label {
+    background-color: $alt-color;
+}
+
+button, .mdl-button, .md-button, .md-button.md-raised, .cart-container .form-cart .action.continue {
+    color: $alt-color;
+    border-color: $alt-color;
+
+    &:hover {
+        color: $white;
+        background-color: $alt-color;
+    }
+}
+
+#notice-cookie-block {
+    background-color: $alt-color;
+}
+
+.cart-container .cart.table-wrapper .actions-toolbar > .action {
+    color: $alt-color !important;
+    border: 1px solid $alt-color;
+
+    &:before {
+        color: $alt-color !important;
+    }
+
+    &:hover {
+        background: $alt-color !important;
+    }
+}
+
+.dp_list-wrapper ._title {
+    padding-bottom: 10px;
+
+    &:after {
+        content: none;
+    }
+}
+
+
+.dp__list-container.dp__alt-boxes {
+    $department-alt-color: #106287;
+
+    // For every 2nd item
+    .dp_list-wrapper:nth-child(2n) {
+        // title
+        ._title {
+            color: $department-alt-color;
+        }
+
+        ._action {
+            a {
+                color: $department-alt-color !important;
+            }
+        }
+
+        // Link color
+        .dp_list a {
+            color: $department-alt-color !important;
+
+            &:hover {
+                color: $department-alt-color !important;
+            }
+        }
+    }
+}
+
+// Section display
+.sd {
+
+    // Main item
+    &__item {
+        // Item title
+        ._title {
+            color: $alt-color;
+        }
+    }
+
+    // Main item
+    &__item {
+        // visual element
+        span {
+            background-color: $alt-color;
+        }
+    }
+}
+
+body:not(.checkout-index-index):not(.page-layout-checkout) {
+    #AmishMarketEast, #BigAppleMeatMarket {
+        // For large screens
+        @include above__phone {
+            width: 190px !important;
+        }
+    }
+}
+
+.newsletter-content {
+    .title {
+        color: $white !important;
+    }
+
+    .field .control input {
+        border-color: transparent !important;
+    }
+}
+
+
+.mb-bottom-toolbar {
+    background-color: $alt-color !important;
+}
+
+.block-search .label:before {
+    color: $alt-color !important;
+}
+
+.cdz-horizontal-menu ul.groupmenu {
+    @include above--phone {
+        padding: 30px 0 10px !important;
+    }
+}
+
+.cdz-horizontal-menu .groupmenu li.all-departments {
+    > a.menu-link {
+        @include above--phone {
+            background-color: $alt-color;
+        }
+
+        &:hover {
+            background-color: darken($alt-color, 5%);
+        }
+
+        span {
+            color: $white !important;
+        }
+    }
+}

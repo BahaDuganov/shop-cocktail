@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DistanceRateShipping
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="distancerate_shippinglist" resource="default" engine="innodb" comment="Distance rate shipping table">
+    <column xsi:type="int" name="drshipping_id" padding="11" unsigned="true" nullable="false" identity="true" comment="DistanceRateshipping Id"/>
+    <column xsi:type="decimal" name="distance_from" scale="4" precision="12" unsigned="true" nullable="false" default="0.0000" comment="Distance From"/>
+    <column xsi:type="decimal" name="distance_to" scale="4" precision="12" unsigned="true" nullable="false" default="0.0000" comment="Distance To"/>
+    <column xsi:type="decimal" name="rate" scale="4" precision="12" unsigned="true" nullable="false" default="0.0000" comment="Rate"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="drshipping_id"/>
+    </constraint>
+  </table> 
+</schema>

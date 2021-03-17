@@ -1,0 +1,16 @@
+<?php
+    $_order = $block->getOrder();
+    if ($_order->getOrderDeliveryDate()):
+?>
+<div class="admin__page-section-title" style="margin-top:20px;">
+    <span class="title"><?php /* @escapeNotVerified */ echo __('Delivery Inforamtion') ?></span>
+</div>
+<div class="admin__page-section-item-content">
+    <strong><?php /* @escapeNotVerified */ echo __('Delivery Date: ') ?></strong>
+    <span id="delivery_date"><?php /* @escapeNotVerified */ echo $_order->getOrderDeliveryDate() ?></span>
+</div>
+<div class="admin__page-section-item-content">
+    <strong><?php /* @escapeNotVerified */ echo __('Delivery Time: ') ?></strong>
+    <span id="delivery_date"><?php /* @escapeNotVerified */ echo $_order->getOrderDeliveryTime() ?></span>
+</div>
+<?php endif; ?>

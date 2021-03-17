@@ -1,0 +1,174 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<div class="reports-content">
+	<div class="entry-edit form-inline">
+		<form id="filter_form" action="<?php echo $block->getFilterUrl() ?>" method="get" novalidate="novalidate">
+			<div></div>
+			<fieldset class="fieldset admin__fieldset " id="sales_report_base_fieldset">
+				<legend class="admin__legend legend">
+					<span>Filter</span>
+				</legend>
+				<br>
+				<div class="messages"></div>
+				<input id="sales_report_store_ids" name="store_ids" data-ui-id="grid-filter-form-fieldset-element-hidden-store-ids" value="" type="hidden">
+				<div class="admin__field field field-report_type  with-note" data-ui-id="grid-filter-form-fieldset-element-form-field-report-type">
+					<label class="label admin__field-label" for="sales_report_report_type" data-ui-id="grid-filter-form-fieldset-element-select-report-type-label">
+						<span>Date Used</span>
+					</label>
+					<div class="admin__field-control control">
+						<select id="sales_report_report_type" name="report_type" class=" select admin__control-select" data-ui-id="grid-filter-form-fieldset-element-select-report-type" disabled="disabled">
+							<option value="created_at_order">Order Created</option>
+							<!--<option value="updated_at_order">Order Updated</option>-->
+						</select>
+						<div class="note admin__field-note" id="report_type-note">The Order Updated report is created in real time and does not require a refresh.</div>
+					</div>
+				</div>
+				<!--<div class="admin__field field field-grouped_by " data-ui-id="grid-filter-form-fieldset-element-form-field-grouped-by">
+					<label class="label admin__field-label" for="sales_report_grouped_by" data-ui-id="grid-filter-form-fieldset-element-select-grouped-by-label">
+						<span>Grouped By</span>
+					</label>
+					<div class="admin__field-control control">
+						<select id="sales_report_grouped_by" name="grouped_by" title="Grouped By" class=" select admin__control-select" data-ui-id="grid-filter-form-fieldset-element-select-grouped-by">
+							<option value="department">Department</option>
+							<option value="delivery">Delivery Time</option>
+						</select>
+					</div>
+				</div>-->
+				<div class="admin__field field field-from admin__field-small required _required" data-ui-id="grid-filter-form-fieldset-element-form-field-from">
+					<label class="label admin__field-label" for="sales_report_from" data-ui-id="grid-filter-form-fieldset-element-text-from-label">
+						<span>From</span>
+					</label>
+					<div class="admin__field-control control">
+						<input name="from" id="sales_report_from" value="" title="From" class="admin__control-text required-entry input-text" aria-required="true" type="text">
+							<script>
+								 require([
+									  "jquery",
+									  "mage/calendar"
+								 ], function($){
+									 $("#sales_report_from").calendar({
+										hideIfNoPrevNext: true,	
+										maxDate: new Date(),	
+										buttonText:"<?php echo __('Select Date') ?>",
+										dateFormat:'mm/d/yy'
+									 });
+								   });
+							</script>
+					</div>
+				</div>
+				<div class="admin__field field field-to admin__field-small required _required" data-ui-id="grid-filter-form-fieldset-element-form-field-to">
+					<label class="label admin__field-label" for="sales_report_to" data-ui-id="grid-filter-form-fieldset-element-text-to-label">
+						<span>To</span>
+					</label>
+					<div class="admin__field-control control">
+						<input name="to" id="sales_report_to" value="" title="To" class="admin__control-text required-entry input-text" aria-required="true" type="text">
+							<script>
+								 require([
+									  "jquery",
+									  "mage/calendar"
+								 ], function($){
+									 $("#sales_report_to").calendar({
+										hideIfNoPrevNext: true,	
+										maxDate: new Date(),	
+										buttonText:"<?php echo __('Select Date') ?>",
+										dateFormat:'mm/d/yy'
+									 });
+								   });
+							</script>
+					</div>
+				</div>
+				<div class="admin__field field field-show_order_statuses  with-note" data-ui-id="grid-filter-form-fieldset-element-form-field-show-order-statuses">
+					<label class="label admin__field-label" for="sales_report_show_order_statuses" data-ui-id="grid-filter-form-fieldset-element-select-show-order-statuses-label">
+						<span>Order Status</span>
+					</label>
+					<div class="admin__field-control control">
+						<select id="sales_report_show_order_statuses" name="show_order_statuses" class=" select admin__control-select" data-ui-id="grid-filter-form-fieldset-element-select-show-order-statuses">
+							<option value="0" selected="selected">Any</option>
+							<option value="1">Specified</option>
+						</select>
+						<div class="note admin__field-note" id="show_order_statuses-note">Applies to Any of the Specified Order Statuses except canceled orders</div>
+					</div>
+				</div>
+				<div class="admin__field field field-order_statuses " data-ui-id="grid-filter-form-fieldset-element-form-field-order-statuses" style="display: none;">
+					<label class="label admin__field-label" for="sales_report_order_statuses" data-ui-id="grid-filter-form-fieldset-element-select-order-statuses-label">
+						<span></span>
+					</label>
+					<div class="admin__field-control control">
+						<select id="sales_report_order_statuses" name="order_statuses" size="6" class="select multiselect admin__control-multiselect ignore-validate" data-ui-id="grid-filter-form-fieldset-element-select-order-statuses" multiple="multiple" disabled="" style="display: none;">
+							<option value="canceled">Canceled</option>
+							<option value="complete">Shipped</option>
+							<option value="fraud">Suspected Fraud</option>
+							<option value="holded">On Hold</option>
+							<option value="pending">Pending</option>
+							<option value="processing">Processing</option>
+						</select>
+					</div>
+				</div>
+				<!--<div class="admin__field field field-show_empty_rows " data-ui-id="grid-filter-form-fieldset-element-form-field-show-empty-rows">
+					<label class="label admin__field-label" for="sales_report_show_empty_rows" data-ui-id="grid-filter-form-fieldset-element-select-show-empty-rows-label">
+						<span>Empty Rows</span>
+					</label>
+					<div class="admin__field-control control">
+						<select id="sales_report_show_empty_rows" name="show_empty_rows" title="Empty Rows" class=" select admin__control-select" data-ui-id="grid-filter-form-fieldset-element-select-show-empty-rows">
+							<option value="1">Yes</option>
+							<option value="0" selected="selected">No</option>
+						</select>
+					</div>
+				</div>
+				<div class="admin__field field field-show_actual_columns " data-ui-id="grid-filter-form-fieldset-element-form-field-show-actual-columns">
+					<label class="label admin__field-label" for="sales_report_show_actual_columns" data-ui-id="grid-filter-form-fieldset-element-select-show-actual-columns-label">
+						<span>Show Actual Values</span>
+					</label>
+					<div class="admin__field-control control">
+						<select id="sales_report_show_actual_columns" name="show_actual_columns" class=" select admin__control-select" data-ui-id="grid-filter-form-fieldset-element-select-show-actual-columns">
+							<option value="1">Yes</option>
+							<option value="0" selected="selected">No</option>
+						</select>
+					</div>
+				</div>-->
+			</fieldset>
+		</form>
+	</div>
+<script>
+require(["mage/adminhtml/form"], function(){
+new FormElementDependenceController({"sales_report_order_statuses":{"sales_report_show_order_statuses":{"values":["1"],"negative":false}}}); });
+</script>
+</div>	
+	
+
+	
+	
+
+<script>
+require([
+    'jquery',
+    'mage/backend/validation',
+    "prototype"
+], function(jQuery){
+
+//<![CDATA[
+    jQuery('#filter_form').mage('validation', {errorClass: 'mage-error'});
+    function filterFormSubmit() {
+        var filters = $$('#filter_form input', '#filter_form select'),
+            elements = [];
+
+        for (var i in filters) {
+            if (filters[i].value && filters[i].value.length && !filters[i].disabled) {
+                elements.push(filters[i]);
+            }
+        }
+
+        if (jQuery('#filter_form').valid()) {
+            setLocation('<?= /* @escapeNotVerified */ $block->getFilterUrl() ?>filter/'+
+                Base64.encode(Form.serializeElements(elements))+'/'
+            );
+        }
+    }
+//]]>
+    window.filterFormSubmit = filterFormSubmit;
+});
+</script>

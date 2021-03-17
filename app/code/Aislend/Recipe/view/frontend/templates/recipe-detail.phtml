@@ -1,0 +1,292 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl();
+$priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data'); // Instance of Pricing Helper
+$productCollection = $this->getLoadProductCollections();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$currency = $objectManager->get('\Magento\Directory\Model\Currency');
+$currencySymbol = $currency->getCurrencySymbol();
+$q = $_GET['q'];
+?>
+<?php
+$ingredientsStr = '';
+if (count($productCollection) > 0): 
+	foreach ($productCollection as $key => $products): $productId = $products[0]['productId'];
+		$ingredientsStr .= $products[0]['ingredientsID'] . ',';
+	endforeach;
+endif;
+?>
+<div class="recipe-content recipe__wrapper">
+    <div class="recipe-container _block bm30">
+        <div class="recipe-img recipe__banner-container"
+             style="background-image: url('<?php echo $this->getRecipeLargeImage(); ?>');">
+            <div class="recipe__image-container">
+                <img src="<?php echo $this->getRecipeLargeImage(); ?>" alt="<?php echo $this->getRecipeName(); ?>"
+                     class="recipe__banner-image">
+
+                <!-- For tablet portrait and blew Only-->
+                <div class="recipe__name-and-tags _block visible-xs visible-sm">
+                    <div class="recipe__name">
+                        <?php echo $this->getRecipeName(); ?>
+                    </div>
+                    <?php if (count($this->getRecipeSourceUrl())) : ?>                        
+                            <ul class="list-unstyled recipe__tags">
+							<?php foreach ($this->getRecipeViewUrl() as $attributesKey => $attributesName): ?>
+                                <li>									
+									<?php foreach($attributesName as $attributeOptions): ?>
+										<a href="#"><?php echo $attributeOptions; ?></a>
+									<?php endforeach; ?>
+								</li>
+							<?php endforeach; ?>
+                            </ul>                        
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!--Name-->
+            <div class="recipe-name recipe__name-container">
+                <div class="recipe__name-and-tags _block hidden-xs hidden-sm">
+                    <div class="recipe__name">
+                        <?php echo $this->getRecipeName(); ?>
+                    </div>
+                    <?php if (count($this->getRecipeSourceUrl())) : ?>                        
+							<ul class="list-unstyled recipe__tags">
+							<?php foreach ($this->getRecipeViewUrl() as $attributesKey => $attributesName): ?>
+                                <li>									
+									<?php foreach($attributesName as $attributeOptions): ?>
+										<a href="javascript:void(0)"><?php echo $attributeOptions; ?></a>
+									<?php endforeach; ?>
+								</li>
+							<?php endforeach; ?>
+                            </ul>                        
+                    <?php endif; ?>
+                </div>
+
+                <!-- Recipe Attributes-->
+                <div class="recipe-attributes recipe__attributes">
+                    <div class="ingredients-count recipe__ingredients-count hidden">
+                        <?php echo $this->getRecipeIngredientsCount(); ?>
+                    </div>
+
+                    <div class="recipe__serving">
+                        <i class="icon icon-serving icon-large"></i> <?php echo $this->getRecipeNoServing(); ?>
+                    </div>
+
+                    <div class="recipe-total-time recipe__total-time">
+                        <i class="icon icon-watch icon-large"></i> <?php echo $this->getRecipeTotalTime(); ?>
+                    </div>
+
+                    <div class="recipe__share">
+                        <i class="icon icon-share icon-large"></i> Share
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="_block">
+        <h4 class="recipe__ingredients-title">Ingredients</h4>
+    </div>
+    <?php if (count($this->getRecipeIngredientLines()) > 0): ?>
+        <ul class="list-unstyled unorder-list row">
+            <?php foreach ($this->getRecipeIngredientLines() as $ingredientsLines): ?>
+                <li class="col-xs-12 col-sm-6"><?php echo $ingredientsLines; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+
+    <script>var ingredients = '<?php echo rtrim($ingredientsStr, ','); ?>';</script>
+    <div id="custom-component" data-bind="scope:'customcomponent'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+		<script type="text/x-magento-init">
+		{
+			"#custom-component": {
+				 "Magento_Ui/js/core/app": {
+						"components": {
+						"customcomponent": {
+						"component": "Aislend_Recipe/js/custom-component"
+					   }
+					  }
+				 }
+			}
+		}
+
+
+		</script>
+    </div>
+	
+    <div id="popup-component" data-bind="scope:'popupcomponent'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+		<script type="text/x-magento-init">
+		{
+			"#popup-component": {
+				 "Magento_Ui/js/core/app": {
+					"components": {
+				   "popupcomponent": {
+					"component": "Aislend_Recipe/js/custom-component",
+					"template": "Aislend_Recipe/popup-data"
+				   }
+				  }
+				 }
+			}
+		}
+        </script>
+    </div>
+	<script>
+		require(
+				[ 'jquery', 'Magento_Ui/js/modal/modal' ],
+				function($, modal) {
+					$("#popup-component").modal({
+						autoOpen: false,
+						responsive: true,
+						clickableOverlay: true,
+						modalClass: 'modal-custom',
+						title: 'More Options'
+					});
+					$(document).on("click",".alternate__item--modal",function(){
+                        $(".modal-footer").remove();
+						$('#popup-component').modal('openModal');
+					});
+					$(document).on("click",".altIngredients__select",function(){
+						$('#popup-component').modal('closeModal');
+					});
+				}
+			);
+	</script>
+</div>
+<div class="_block text-center">
+    <button id="ajax-info-action" type="button" class="btn hidden btn__default ingredient__add-btn ingredents-add-button">
+        + Add selected ingredients to cart
+    </button>
+
+</div>
+
+<div class="ingredient-add hidden _block text-center">
+    <a class="btn btn__hollow ingredient__add-btn" href="<?php echo $this->getRecipeSourceUrl()['sourceRecipeUrl']; ?>"
+       target="_blank">Read
+        Directions</a>
+</div>
+
+<script type="text/x-magento-init">
+ {
+  "#ajax-info-action":
+  {
+   "Aislend_Recipe/js/recipes-list": { }
+  }
+ }
+
+
+</script>
+
+<?php if (count($productCollection)): ?>
+    <script>
+        var alternateProductJson = <?php echo json_encode($productCollection); ?>;        
+    </script>
+<?php endif; ?>
+<div class="recipe__related-porducts-list _block">
+    <div class="recommendation__title bm30">
+        <strong>Related Recipes</strong>
+    </div>
+    <div class="related-products recipe__related-porducts _block">
+        <?php if (count($this->getRelatedProductList() > 0)): ?>
+            <div class="products wrapper cp__products-wrapper column main cp__product-items">
+                <ol class="products list items product-items cp__list-wrapper">
+                    <?php foreach ($this->getRelatedProductList() as $recipes) {
+                        $recipeId = $recipes['id'];
+                        //$q = $_GET['q'];
+						
+                        ?>
+                        <?php //print_r($recipes);?>
+                        <li class="item product product-item cp__list-item">
+                            <div class="product-item-info product__card">
+                                <?php if (substr($q, -3) == "%2F") $q = substr($q, 0, -3); ?>
+                                <a href="<?php echo $this->getUrl("") . 'aislendRecipe/recipe/index/recipe-id/' . $recipeId .'?q='. $q; ?>"
+                                   class="product photo product-item-photo product__img-anchor">
+                                    <img src="<?php echo str_replace("s90-c", "s375-c", $recipes['imageUrlsBySize'][90]); ?>">
+                                </a>
+								
+                                <div class="product details product-item-details product__card-details product__recipe-card-details">
+                                    <strong class="product name product-item-name product__item-title product__recipe-item-title">
+                                        <a href="<?php echo $this->getUrl("") . 'aislendRecipe/recipe/index/recipe-id/' . $recipeId .'?q='. $q; ?>"
+                                           class="product-item-link product__recipe-item-link"><?php echo($recipes['recipeName']); ?>
+                                        </a>
+                                    </strong>
+
+                                    <div class="product__tags-container">
+                                        Dessert, Friots, Pies, Cakes &amp; Tarts, Thanksgiving
+                                    </div>
+
+                                    <div class="product__serving-time">
+                                        <?php
+                                        $hour = floor($recipes['totalTimeInSeconds'] / 3600);
+                                        $minute = floor(($recipes['totalTimeInSeconds'] / 60) % 60);
+                                        $time = '';
+                                        if ($hour > 0):
+                                            $time .= $hour;
+                                        endif;
+                                        if ($minute > 0):
+                                            $time .= ($hour > 0) ? ':' : '';
+                                            $time .= $minute;
+                                            $time .= ' Min';
+                                        endif;
+                                        if ($hour > 0 && $minute == 0):
+                                            $time .= ($hour > 1) ? ' Hrs' : ' Hr';
+                                        endif;
+                                        ?>
+
+                                        <div class="product__prep-time">
+                                            <?php echo $time; ?>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ol>
+            </div>
+        <?php endif; ?>
+    </div>
+    <!--<div class="_block text-center">
+        <a class="btn btn__default ingredient__add-btn" href="#"
+           target="_blank">Browse More Recipes</a>
+    </div>-->
+</div>
+<script>
+require([
+    'jquery',
+    'jquery/ui'
+], function ($) {
+
+    $(document).ready(function () {		
+        var productIdsList = [];
+        var productArrayList = [];
+        var price = 0;
+        $(document).on('click','input',function(){		
+			var currency = '<?php echo $currencySymbol; ?>';
+            var getPrice = $(this).attr('price');
+            if($(this).is(':checked')){
+                var produtIds = $(this).val();
+                $(this).attr('name','product['+produtIds+']');
+                price = price + parseFloat(getPrice);
+            }else
+            {
+                $(this).attr('name','');
+                price = price - parseFloat(getPrice);
+            }
+            if(price > 0)
+            {				
+				$('#ajax-info-action').removeAttr('disabled');
+                $('.ingredents-add-button').html('+ Add Selected Ingredients to Cart '+ currency + price.toFixed(2));
+            }else {				
+				$('#ajax-info-action').attr('disabled','disabled');
+                $('.ingredents-add-button').html('+ Add Selected Ingredients to Cart ');
+            }
+
+        })
+    });
+});
+</script>

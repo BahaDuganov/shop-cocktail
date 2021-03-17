@@ -1,0 +1,24 @@
+<?php if($block->isEnable()) : ?>
+<?php 
+$quoteid = $block->getQuoteId();
+$itemid = $block->getItemId();
+?>
+<div id="addinstruction" data-bind="scope:'addinstruction'">
+	<!-- ko template: getTemplate() --><!-- /ko -->
+	<script type="text/x-magento-init">
+	{
+		"#addinstruction": {
+			"Magento_Ui/js/core/app": {
+				"components": {
+					"addinstruction": {
+						"component": "Aislend_Instruction/js/add-instruction",
+						"quoteid": "<?php echo $block->getQuoteId(); ?>",
+						"itemid": "<?php echo $block->getItemId(); ?>"					
+					}
+				}
+			}
+		}
+	}
+	</script>
+</div>	
+<?php endif; ?>

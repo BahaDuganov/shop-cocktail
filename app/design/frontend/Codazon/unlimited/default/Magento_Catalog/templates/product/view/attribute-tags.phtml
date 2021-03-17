@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+$_product = $block->getProduct();
+?>
+
+<!-----Product Tags---------->
+
+<?php if ($_product->getProductTags()):
+    $tags = $_product->getResource()->getAttribute('product_tags')->getFrontend()->getValue($_product);
+    $tagArray = explode(',', $tags);
+    ?>
+    <div class="product__allTagsContainer _block">
+        <ul class="product__tagsList">
+            <?php foreach ($tagArray as $tag): $img = strtolower(trim($tag)); ?>
+                <li class="product__tagsItem">
+                    <span title="<?php echo(str_replace("-", " ", trim($tag))); ?>"
+                          class="icon icon-<?php echo strtolower(str_replace(" ", "-", trim($tag))); ?>"></span>
+                    <span title="<?php echo str_replace("-", " ", trim($tag)); ?>"
+                          class="tags-name _block"><?php echo(str_replace("-", " ", trim($tag))); ?></span>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<!-----Product Tags---------->
+
+

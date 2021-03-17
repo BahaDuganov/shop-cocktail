@@ -1,0 +1,84 @@
+//  ============================================
+//  @author: nChauhan
+//  @package: Important config & style variables
+//  ============================================
+
+//  =====================================================================================
+//  ++++++++++++++++++++++++++++++++ Main variables +++++++++++++++++++++++++++++++++++++
+//  =====================================================================================
+$site-container-max-width: 1300px; //  Control max width of the application from here.
+$site-container-min-width: 320px; //  Control min width of the application from here.
+
+// Font sizing
+$vw-base: 0.052vw;
+
+$base-spacing-unit: 15px;
+$theme-primary: #fff;
+$dark-green: #fff;
+$alt-color: #2A3439;
+
+$white: #ffffff;
+$grey: #dddbdb;
+$light-grey: #a7a6a6;
+$light-green: #48BF84;
+
+$theme-orange: $theme-primary;
+$pd-green: $light-green;
+$cl-purple: $theme-primary;
+$theme-grey: #f4f4f4;
+$orange-highlight: #FE5F55;
+
+//  =================
+//  Custom variables
+//  =================
+$main-page-bg: #f9f9f9;
+$heading-color: #082E40;
+$description-color: #2A3439;
+$header-nav-separator: $theme-primary;
+$card-price-color: #707070;
+$header-text-color: #2A3439;
+
+$btn-primary-text: $alt-color;
+$btn-primary-bg: $theme-primary;
+$btn-primary-border: $theme-primary;
+
+$btn-primary-hover-bg: $alt-color;
+$btn-primary-hover-text: $theme-primary;
+$btn-primary-hover-border: $alt-color;
+
+$qs-text: $white;
+$qs-bg: $alt-color;
+$qs-hover-text: $white;
+$qs-hover-bg: darken($qs-bg, 10%);
+
+$slider-nav-color: $alt-color;
+$slider-nav-bg: $theme-primary;
+$wishlist-hover-bg: $alt-color;
+
+$product-card-title-text: $alt-color;
+$product-card-title-text-hover: $alt-color;
+
+$popup-price-text: $alt-color;
+$product-vendor-text: $alt-color;
+
+$footer-icons-color: $white;
+$footer-icons-hover-color: $white;
+
+$minicart-price-color: $alt-color;
+$progress-bar-percent: lighten($alt-color, 50%);
+$progress-bar-text: $alt-color;
+//  =================
+//  Header variables
+//  =================
+$feature-links-color: $header-text-color;
+$header-subnav-color: $header-text-color;
+$search-border-color: 1px solid rgba(black, 0.2);
+
+//  =======================
+//  Home content variables
+//  =======================
+$home-block-heading: $heading-color;
+$home-block-description: $description-color;
+
+$category-text-base-color: $alt-color;
+$ty-highlight: #e5e5e5;

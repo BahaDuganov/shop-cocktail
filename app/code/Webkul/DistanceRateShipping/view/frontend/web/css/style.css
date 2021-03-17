@@ -1,0 +1,6 @@
+.wkdrs-calculate, .wkdrs-address {
+    vertical-align: middle!important;
+}
+#wkdrs-estimate-container {
+    display: none;
+}

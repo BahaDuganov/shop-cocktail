@@ -1,0 +1,233 @@
+.pd {
+    // Main outer wrapper
+    &__main-wrapper {
+        display: flex;
+        background-color: $white;
+        box-shadow: 0px 0px 10px 4px rgba(#ccc, 0.3);
+
+        // For large screens
+        @include above__phone {
+            padding: 0 2em;
+            margin-bottom: ($base-spacing-unit * 3);
+        }
+
+        // For mobile devices
+        @include phone {
+            padding: 0 1em;
+            flex-direction: column;
+            margin-bottom: ($base-spacing-unit * 2);
+        }
+
+        + .pd__detail-content {
+            position: relative;
+
+            // For large screens
+            @include above__phone {
+                //top: -#{($base-spacing-unit * 3)};
+            }
+
+            // For mobile devices
+            @include phone {
+                //top: -#{($base-spacing-unit * 2)}
+            }
+        }
+    }
+
+    // Media section wrapper
+    &__media-wrapper {
+        display: flex;
+        position: relative;
+
+        // For large screens
+        @include above__phone {
+            width: 35%;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+    }
+
+    // Media inner section
+    &__media-inner {
+        display: flex;
+        width: 100% !important;
+        flex-direction: column;
+        margin-bottom: 0 !important;
+
+        // Gallery for product
+        .gallery-container {
+            flex: 1;
+        }
+    }
+
+    // Product info section wrapper
+    &__info-wrapper {
+
+        // For large screens
+        @include above__phone {
+            width: 65%;
+        }
+    }
+
+    // Inner info container (?)
+    &__info-inner {
+        display: none;
+    }
+
+    // Info content container
+    &__info-container {
+        display: flex;
+
+        // For large screens
+        @include above__phone {
+            width: 100% !important;
+        }
+
+        // For mobile devices
+        @include phone {
+            flex-direction: column;
+        }
+    }
+
+    // Details
+    &__info {
+        flex: 1.5;
+
+        // For large screens
+        @include above__phone {
+            padding: 2em;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+
+        .page-title-wrapper h1 {
+            padding-bottom: 15px;
+
+            &:after {
+                height: 5px;
+                bottom: 5px;
+                background-color: $theme-primary;
+            }
+        }
+    }
+
+
+    // Action / add area
+    &__action-wrapper {
+        flex: 1;
+
+        // For large screens
+        @include above__phone {
+            padding: 2em 0 2em 3em;
+        }
+
+        // For mobile devices
+        @include phone {
+        }
+
+        .price-box {
+            padding-bottom: $base-spacing-unit;
+            border-bottom: 1px solid $grey;
+        }
+
+        .product-static-text {
+            display: none;
+        }
+    }
+
+    // Share menu
+    &__share {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        // List
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+
+            > li {
+                padding: 0 ($base-spacing-unit / 2);
+            }
+        }
+
+        // change angular material style
+        .mdl-button--fab {
+            color: $light-grey;
+            box-shadow: none !important;
+            background-color: transparent !important;
+
+            &:hover {
+                color: $alt-color !important;
+            }
+        }
+    }
+}
+
+// Stock status
+.stock__status {
+    color: $pd-green
+}
+
+
+.product-aislend-gift-card {
+    .pd__info-container {
+        flex-direction: column;
+    }
+
+    .pd__action-wrapper {
+        @include above--phone {
+            padding: 2em 0 2em 2em;
+        }
+    }
+
+    .pd__info {
+        padding-bottom: 0;
+    }
+
+    .amcard-flex-container {
+        @include phone {
+            flex-direction: column;
+        }
+    }
+
+    .box-tocart {
+        float: left;
+        width: 100%;
+    }
+
+    .modal-popup.modal-slide {
+        @include phone {
+            left: 0 !important;
+        }
+    }
+
+    .modal-popup .modal-inner-wrap {
+        // For large screens
+        @include above__phone {
+            width: 55% !important;
+        }
+
+        // For mobile devices
+        @include phone {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+    }
+
+    .modal-popup .modal-inner-wrap .modal-header .action-close {
+        right: 0 !important;
+    }
+}
+
+.category-gift-card {
+    .qs-button {
+        display: none !important;
+    }
+}

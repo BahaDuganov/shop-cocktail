@@ -1,0 +1,35 @@
+<!-- 
+/**
+ * Webkul Software
+ *
+ * @category    Webkul
+ * @package     Webkul_DistanceRateShipping
+ * @author      Webkul
+ * @copyright   Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license     https://store.webkul.com/license.html
+ */ -->
+<style>
+#row_carriers_distancerateshipping_showmethod {
+    display: table-row!important;
+}
+</style>
+<?php
+    $section = $block->getRequest()->getParam('section');
+if ($section=='wk_distancerateshipping') { ?>
+    <?php
+    $viewModel = $block->getViewModel();
+    $helper = $viewModel->getDrHelper();
+    $data = $helper->getConfig();
+    ?>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?=
+    /* @noEscape */ $data['googleApi'];
+    ?>&libraries=places">
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "custom": {}
+            }
+        }
+    </script>
+<?php } ?>

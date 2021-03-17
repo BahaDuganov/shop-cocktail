@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--
+ /**
+  * @category  Webkul
+  * @package   Webkul_DistanceRateShipping
+  * @author    Webkul
+  * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+  * @license   https://store.webkul.com/license.html
+  */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="wk_distancerateshipping" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Distance Rate Shipping</label>
+            <tab>webkul</tab>
+            <resource>Webkul_DistanceRateShipping::config_DistanceRateShipping</resource>
+            <group id="general_settings" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Distance Rate Shipping</label>
+                 <field id="shipping_manage" showInWebsite="1" translate="label comment" sortOrder="1" type="select" showInDefault="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_key" showInWebsite="1" translate="label comment" sortOrder="1" type="password" showInDefault="1">
+                    <label>Google Map Api Key</label>
+                </field>
+                <field id="location" showInWebsite="1" translate="label comment" sortOrder="1" type="text" showInDefault="1">
+                    <label>Admin Location</label>
+                    <comment>Please enter Google Map Api and save to make it work </comment>
+                </field>
+                <field id="latitude" showInWebsite="1" translate="label comment" sortOrder="1" type="text" showInDefault="1">
+                    <label>Admin Latitude</label>
+                </field>
+                <field id="longitude" showInWebsite="1" translate="label comment" sortOrder="1" type="text" showInDefault="1">
+                    <label>Admin Longitude</label>
+                </field>
+                 <field id="productShipping" showInWebsite="1" translate="label comment" sortOrder="1" type="select" showInDefault="1">
+                    <label>Show estimate on product page? </label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="distanceCalculateBase" showInWebsite="1" translate="label comment" sortOrder="1" type="select" showInDefault="1">
+                    <label>Calculate Distance Based On</label>
+                    <source_model>Webkul\DistanceRateShipping\Model\Config\Source\DistanceBase</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="carriers">
+            <group id="distancerateshipping" translate="label" type="text" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Distance Rate Shipping</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Enabled for checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" showInWebsite="1" translate="label comment" sortOrder="2" type="text" showInDefault="1">
+                    <label>Title</label>
+                </field>
+                <field id="methodName" showInWebsite="1" translate="label comment" sortOrder="3" type="text" showInDefault="1">
+                    <label>Method Name</label>
+                </field>
+                <field id="specificerrmsg" translate="label" type="textarea" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Displayed Error Message</label>
+                </field>
+                <field id="productQty" showInWebsite="1" translate="label comment" sortOrder="7" type="select" showInDefault="1">
+                    <label>Item wise rate</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="maximum_area" showInWebsite="1" translate="label comment" sortOrder="6" type="text" showInDefault="1">
+                    <label>Maximum Area Cover</label>
+                    <validate>validate-number</validate>
+                </field>
+                <field id="unit" translate="label" type="select" sortOrder="10" showInDefault="4" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Unit</label>
+                    <source_model>Webkul\DistanceRateShipping\Model\Config\Source\Unit</source_model>
+                </field>
+                <field id="rate_per" showInWebsite="1" translate="label comment" sortOrder="5" type="text" showInDefault="1">
+                    <label>Rate per Unit</label>
+                    <validate>validate-number</validate>
+                </field>
+                 <field id="handling_charge" showInWebsite="1" translate="label comment" sortOrder="8" type="text" showInDefault="1">
+                    <label>Handling Charge</label>
+                    <validate>validate-number</validate>
+                </field>
+                 <field id="minimum_amount" showInWebsite="1" translate="label comment" sortOrder="9" type="text" showInDefault="1">
+                    <label>Minimum Charge</label>
+                    <validate>validate-number</validate>
+                </field>
+                 <field id="sallowspecific" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Ship to Applicable Countries</label>
+                    <frontend_class>shipping-applicable-country</frontend_class>
+                    <source_model>Magento\Shipping\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ship to Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="showmethod" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Show Method if Not Applicable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

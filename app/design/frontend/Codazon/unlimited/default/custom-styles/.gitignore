@@ -1,0 +1,6 @@
+#ignore compilation files
+node_modules
+.sass-cache
+../**/*.css.map
+../css/**/*.css.map
+package-lock.json

@@ -1,0 +1,467 @@
+// Team members profile
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.tp {
+    // Main wrapper
+    &__wrapper {
+        width: 100%;
+        float: left;
+        background-color: #f4faf6;
+
+        // For large screens
+        @include above__phone {
+            padding-bottom: 100px;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding-bottom: 30px;
+        }
+    }
+
+    // Main banner wrapper
+    &__banner-wrapper {
+        width: 100%;
+        float: left;
+        position: relative;
+        margin-bottom: $base-spacing-unit * 2;
+    }
+
+    // Image wrapper
+    &__banner-image {
+        display: flex;
+
+        // For large screens
+        @include above__phone {
+            min-height: 350px;
+        }
+
+        // For mobile devices
+        @include phone {
+            min-height: 250px;
+        }
+
+        // Gradient overlay
+        &:before {
+            //content: '';
+            //position: absolute;
+            //width: 100%;
+            //height: 100%;
+            //background: linear-gradient(90deg, rgba($theme-primary, 0.6) 0%, rgba($theme-orange, 0.6) 100%);
+
+        }
+
+        // Img element
+        ._image {
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+    }
+
+    // Caption container
+    &__banner-caption {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        transform: translateX(-50%);
+
+        // For large screens
+        @include above__phone {
+            width: 80%;
+            bottom: 2em;
+            max-width: 1200px;
+        }
+
+        // For mobile devices
+        @include phone {
+            width: 90%;
+            bottom: 2em;
+        }
+
+        // Member name
+        ._name {
+            color: $dark-green;
+            position: relative;
+            margin-bottom: $base-spacing-unit;
+            padding-bottom: $base-spacing-unit;
+
+            // For large screens
+            @include above__phone {
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+
+            // Underline
+            &:after {
+                position: absolute;
+                z-index: 1;
+                left: 0;
+                bottom: 0;
+
+                content: '';
+                height: 10px;
+                width: 65px;
+                background-color: $dark-green;
+            }
+        }
+
+        // Designation
+        ._designation {
+            color: $white;
+            line-height: 1;
+            letter-spacing: -1px;
+
+            // For large screens
+            @include above__phone {
+                font-size: 6rem;
+                font-weight: 600;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 3.5rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    // Person biography
+    &__bio {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        margin: 0 auto;
+        text-align: center;
+
+        color: $dark-green;
+        font-weight: 300;
+
+        // For large screens
+        @include above__phone {
+            max-width: 50%;
+            padding: 4em 0;
+            font-size: 1.6rem;
+            line-height: 1.6;
+        }
+
+        // For mobile devices
+        @include phone {
+            max-width: 80%;
+            padding: 2em 0;
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+    }
+
+    // Details Info wrapper
+    &__detail-wrapper {
+        color: $dark-green;
+
+        // For large screens
+        @include above__phone {
+            width: 50%;
+            float: left;
+            padding-right: 3rem;
+        }
+
+        // If both sections exist
+        + .tp__hobbies-wrapper {
+
+            // For large screens
+            @include above__phone {
+                width: 50%;
+                flex-wrap: wrap;
+            }
+
+            .tp__hobby-item {
+                // For large screens
+                @include above__phone {
+                    width: 50%;
+                    margin-bottom: $base-spacing-unit;
+                }
+
+                // For mobile devices
+                @include phone {
+                }
+            }
+        }
+
+
+        // Content style
+        ._title {
+            font-weight: 600;
+            margin-bottom: $base-spacing-unit / 2;
+
+            // For large screens
+            @include above__phone {
+                font-size: 1.4rem;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1rem;
+            }
+        }
+
+        ._description {
+            font-size: 15px;
+            font-weight: 300;
+            margin-bottom: $base-spacing-unit * 2;
+
+            // For large screens
+            @include above__phone {
+                max-width: 85%;
+            }
+
+            // For mobile devices
+            @include phone {
+            }
+        }
+    }
+
+    // Person hobbies list
+    &__hobbies-wrapper {
+        display: flex;
+        margin: 0 -#{($base-spacing-unit / 2)};
+
+        // For large screens
+        @include above__phone {
+
+        }
+
+        // For mobile devices
+        @include phone {
+            overflow-x: scroll;
+        }
+
+    }
+
+    // Hobby wrapper
+    &__hobby-item {
+        display: flex;
+
+        // For large screens
+        @include above__phone {
+            width: 25%;
+            padding: 0 ($base-spacing-unit / 2);
+        }
+
+        // For mobile devices
+        @include phone {
+            width: 95%;
+            flex: 1 0 95%;
+            padding: $base-spacing-unit ($base-spacing-unit / 2);
+        }
+    }
+
+    // Internal card
+    &__hobby-card {
+        width: 100%;
+        background-color: $white;
+        box-shadow: 0 0 10px 4px rgba(#ccc, 0.3);
+
+        padding: $base-spacing-unit;
+
+        // Icon
+        ._icon {
+            font-size: 3rem;
+            color: var(--theme);
+
+            padding: $base-spacing-unit 0;
+        }
+
+        // Title
+        ._title {
+            color: $dark-green;
+            position: relative;
+            margin-bottom: $base-spacing-unit;
+            padding-bottom: $base-spacing-unit;
+
+            // For large screens
+            @include above__phone {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            // For mobile devices
+            @include phone {
+                font-size: 1.4rem;
+                font-weight: 600;
+            }
+
+            // Underline
+            &:after {
+                position: absolute;
+                z-index: 1;
+                left: 0;
+                bottom: 0;
+
+                content: '';
+                height: 10px;
+                width: 65px;
+                background-color: var(--theme);
+            }
+        }
+
+        // Description
+        ._description {
+            font-size: 16px;
+            font-weight: 300;
+            color: $light-grey;
+        }
+    }
+
+    // Page navigation wrapper
+    &__nav-wrapper {
+        width: 100%;
+        display: flex;
+
+        // For large screens
+        @include above__phone {
+            padding: 4rem 0;
+        }
+
+        // For mobile devices
+        @include phone {
+            padding: 1rem 0;
+        }
+    }
+
+    // Nav list
+    &__nav {
+        &:first-child {
+            margin-right: $base-spacing-unit;
+        }
+    }
+
+    // Item
+    &__nav-item {
+        float: left;
+        width: 100%;
+        position: relative;
+
+        // Right link
+        &.right {
+            // Thumb gradients
+            ._image:before {
+                background: linear-gradient(90deg, rgba($theme-orange, 0.85) 0%, rgba($theme-orange, 0.5) 100%);
+            }
+        }
+
+        // Left link
+        &.left {
+            // Thumb gradients
+            ._image:before {
+                background: linear-gradient(90deg, rgba($theme-primary, 0.5) 0%, rgba($theme-primary, 0.85) 100%);
+            }
+
+            // Left arrow
+            ._title i {
+                transform: rotate(180deg);
+            }
+        }
+
+        // Hover
+        &:hover {
+            // Left link
+            &.left {
+                // Left arrow
+                ._title i {
+                    transform: rotate(180deg) translateX(20px);
+                }
+            }
+
+            // right link
+            &.right {
+                // right arrow
+                ._title i {
+                    transform: translateX(20px);
+                }
+            }
+        }
+
+        // Image
+        ._image {
+            display: flex;
+            position: relative;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+
+            // Gradient overlay
+            &:before {
+                content: '';
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        ._title {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+
+            color: $white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            // For large screens
+            @include above__phone {
+                padding: $base-spacing-unit * 2;
+            }
+
+            // For mobile devices
+            @include phone {
+                padding: $base-spacing-unit / 2;
+            }
+
+            // Icon
+            i {
+                transition: all 150ms ease-in-out;
+
+                // For large screens
+                @include above__phone {
+                    font-size: 3.5rem;
+                }
+
+                // For mobile devices
+                @include phone {
+                    font-size: 1.5rem;
+                }
+            }
+
+            // Text
+            > span {
+                // For large screens
+                @include above__phone {
+                    font-size: 2.5rem;
+                }
+
+                // For mobile devices
+                @include phone {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,433 @@
+// Mulberry about us page
+.mabt {
+    // Main wrapper
+    &__wrapper {
+        width: 100%;
+        float: left;
+        background-color: $white;
+    }
+
+    // Banner section
+    &__banner {
+
+        // Caption
+        ._caption {
+            display: grid;
+            place-items: end center;
+
+            // Title
+            h1 {
+                color: $white;
+                max-width: 600px;
+                text-align: center;
+                padding-bottom: $base-spacing-unit;
+                font-size: clamp(25px, 3.65vw, 70px);
+            }
+        }
+    }
+
+    // Hope section
+    &__hope {
+        .abt__journey:before {
+            background-color: $theme-primary;
+        }
+
+        .abt__journey ._title {
+            color: $theme-primary;
+        }
+    }
+
+    // Ownership
+    &__ownership {
+        margin: 0 auto;
+        max-width: 1050px;
+        text-align: center;
+        padding: clamp($base-spacing-unit * 2, 3.9vw, 90px);
+
+        // title
+        ._title {
+            color: $theme-primary;
+            margin-bottom: $base-spacing-unit * 2;
+            font-size: clamp(30px, ($vw-base * 40), 40px);
+        }
+
+        // Details
+        ._description {
+            font-weight: 300;
+            font-size: clamp(18px, ($vw-base * 22), 24px);
+        }
+    }
+
+    // Owner area
+    &__owner {
+        // Image section
+        ._media {
+            display: flex;
+
+            img {
+                object-position: center right !important;
+
+                // For mobile devices
+                @include phone {
+                    filter: brightness(60%);
+                }
+            }
+        }
+
+        ._caption {
+            display: flex;
+            align-items: center;
+            padding: $base-spacing-unit * 2;
+
+            // For mobile devices
+            @include phone {
+                padding: $base-spacing-unit * 2;
+            }
+        }
+
+        ._caption-content {
+            max-width: 420px;
+
+            h4 {
+                color: #FE5F55;
+                font-size: clamp(30px, ($vw-base * 40), 40px);
+            }
+
+            ._content {
+                color: $white;
+                font-size: clamp(18px, ($vw-base * 22), 24px);
+            }
+        }
+    }
+
+    // Neighbor area
+    &__neighbor {
+        grid-template-rows: auto;
+
+        // Image section
+        ._media img {
+            object-position: right top !important;
+        }
+
+        ._caption {
+            display: flex;
+            align-items: center;
+            padding: $base-spacing-unit * 2;
+
+            // For mobile devices
+            @include phone {
+                padding: $base-spacing-unit * 2;
+            }
+        }
+
+        ._caption-content {
+            color: $white;
+            max-width: 700px;
+
+            h4 {
+                font-size: clamp(30px, ($vw-base * 50), 50px);
+                margin-bottom: clamp(50px, ($vw-base * 90), 150px);
+            }
+
+            ._content {
+                font-weight: 300;
+                font-size: clamp(18px, ($vw-base * 22), 24px);
+            }
+        }
+    }
+
+    // Grid list
+    &__neighbor-title {
+        color: #2a4747;
+        text-align: center;
+        padding: clamp(25px, ($vw-base * 60), 60px) 0;
+        font-size: clamp(34px, ($vw-base * 62), 62px);
+    }
+
+    // Grid item
+    &__neighbor-item {
+        width: 100%;
+        display: flex;
+        padding: 0 10px;
+
+        // For mobile devices
+        @include phone {
+            flex-direction: column;
+            margin-bottom: $base-spacing-unit * 2;
+        }
+
+        > * {
+            // For large screens
+            @include above__phone {
+                width: 50%;
+            }
+        }
+
+        ._description {
+            color: #2a4747;
+            align-self: center;
+            font-size: clamp(18px, ($vw-base * 22), 24px);
+            padding: ($base-spacing-unit * 2) clamp(45px, ($vw-base * 180), 180px) ($base-spacing-unit * 2) 0;
+
+            &.alt {
+                text-align: right;
+                padding: ($base-spacing-unit * 2) 0 ($base-spacing-unit * 2) clamp(45px, ($vw-base * 180), 180px);
+
+                // For mobile devices
+                @include phone {
+                    text-align: center;
+                    padding: $base-spacing-unit 0;
+                }
+            }
+
+            // For mobile devices
+            @include phone {
+                order: 1;
+                text-align: center;
+                padding: $base-spacing-unit 0;
+            }
+        }
+
+        ._image {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            // For mobile devices
+            @include phone {
+                order: 0;
+            }
+        }
+    }
+
+    // Family area
+    &__family {
+        grid-template-rows: auto;
+
+        // Image section
+        ._media img {
+            object-position: right top !important;
+
+            // For mobile devices
+            @include phone {
+                filter: brightness(80%);
+            }
+        }
+
+        ._caption {
+            display: flex;
+            align-items: center;
+            padding: $base-spacing-unit * 2;
+
+            // For mobile devices
+            @include phone {
+                padding: $base-spacing-unit * 2;
+            }
+        }
+
+        ._caption-content {
+            color: $white;
+            max-width: 700px;
+
+            h4 {
+                font-size: clamp(30px, ($vw-base * 50), 50px);
+                margin-bottom: clamp(30px, ($vw-base * 70), 75px);
+            }
+
+            ._action {
+                color: $white;
+                font-weight: 600;
+                font-size: clamp(18px, ($vw-base * 30), 30px);
+            }
+        }
+    }
+
+    // father & son section
+    &__fs-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: clamp(($base-spacing-unit * 2), ($vw-base * 80), 100px);
+
+        // For mobile devices
+        @include phone {
+            text-align: center;
+            flex-direction: column;
+        }
+
+        // Headline
+        ._header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: $base-spacing-unit* 3;
+
+            color: $heading-color;
+            font-size: clamp(35px, ($vw-base * 50), 60px);
+        }
+
+        // Content section
+        ._content {
+            flex: 1;
+            padding: $base-spacing-unit;
+
+            // For large screens
+            @include above__phone {
+                max-width: 40%;
+            }
+
+            // For mobile devices
+            @include phone {
+            }
+
+            // Heading
+            h4 {
+                color: $theme-primary;
+                font-size: clamp(24px, ($vw-base * 32), 36px);
+            }
+
+            // Description
+            p {
+                font-size: clamp(18px, ($vw-base * 22), 24px);
+            }
+        }
+
+        // Left section
+        ._left {
+        }
+
+        // Right section
+        ._right {
+        }
+    }
+
+    &__img-grid {
+        background-color: #242b3d;
+    }
+}
+
+// Global banner
+.banner {
+    // Wrapper
+    &__wrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+
+        // Media section
+        ._media {
+            display: flex;
+            grid-row-start: 1;
+            grid-column-start: 1;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+
+        // Caption
+        ._caption {
+            z-index: 1;
+            grid-row-start: 1;
+            grid-column-start: 1;
+        }
+    }
+}
+
+// Image grid
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 10px;
+    //grid-auto-rows: minmax(180px, auto);
+    grid-auto-rows: 250px;
+    grid-auto-flow: dense;
+    padding: 10px;
+}
+
+.grid-item {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #929796;
+    background-color: #333;
+    border-radius: 5px;
+
+    &:nth-child(odd) {
+        background-color: #424242;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+.span-2 {
+    grid-row-end: span 2;
+}
+
+.span-2-h {
+    grid-column-end: span 2;
+}
+
+// ==========================================================
+// ==========================================================
+
+.mabt__wrapper.amish {
+    .banner__wrapper ._caption {
+        place-items: center;
+
+        h1 {
+            color: $dark-green;
+            padding: 1vw 1.5vw;
+            background-color: rgba($white, 0.8);
+        }
+    }
+}
+
+.mabt__ownership.amish {
+    // title
+    ._title {
+        color: $dark-green;
+        font-weight: 600;
+        font-size: clamp(30px, ($vw-base * 40), 40px);
+    }
+
+    // Details
+    ._description {
+        font-weight: 400;
+    }
+}
+
+.mabt__neighbor.amish {
+    // Grid list
+    .mabt__neighbor-title {
+        font-weight: 600;
+    }
+
+    .mabt__neighbor-item h4 {
+        font-weight: 600;
+        font-size: clamp(24px, ($vw-base * 30), 30px);
+    }
+}
+
+.mabt__neighbor.amish._alt-clr {
+    background-color: #242b3d;
+
+    .mabt__neighbor-title + ._description {
+        text-align: center;
+        margin-bottom: $base-spacing-unit * 3.5;
+        font-size: clamp(14px, ($vw-base * 18), 18px);
+    }
+
+    .mabt__neighbor-title, .mabt__neighbor-item ._description, .mabt__neighbor-title + ._description {
+        color: $white;
+    }
+}

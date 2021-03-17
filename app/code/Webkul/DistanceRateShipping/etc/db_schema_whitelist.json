@@ -1,0 +1,13 @@
+{
+    "marketplace_shippinglist": {
+        "column": {
+            "drshipping_id": true,
+            "distance_from": true,
+            "distance_to": true,
+            "rate": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
